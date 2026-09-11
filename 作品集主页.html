@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吕森垚 · 游戏策划作品集</title>
+<style>
+:root{
+  --bg:#0d0d13; --bg2:#11111a; --panel:#15151f; --line:#262633;
+  --text:#e6e7ef; --dim:#8f91a6; --gold:#dfa55a; --gold-soft:rgba(223,165,90,.32);
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,"Segoe UI",sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+/* 导航 */
+nav{position:sticky;top:0;z-index:50;background:rgba(13,13,19,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+.brand{font-weight:700;font-size:15px;letter-spacing:1px;}
+.brand b{color:var(--gold);font-weight:700;}
+nav .links{display:flex;gap:30px;font-size:13.5px;color:var(--dim);letter-spacing:1px;}
+nav .links a{transition:color .2s;}
+nav .links a:hover{color:var(--gold);}
+@media(max-width:640px){nav .links{display:none;}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;padding:118px 0 96px;text-align:center;}
+.hero::before{content:"";position:absolute;top:-240px;left:50%;transform:translateX(-50%);width:820px;height:520px;background:radial-gradient(ellipse at center,rgba(223,165,90,.10),transparent 65%);pointer-events:none;}
+.hero .wrap{position:relative;}
+.hero .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:7px 20px;font-size:11.5px;color:var(--dim);letter-spacing:3px;margin-bottom:34px;}
+.hero h1{font-family:var(--serif);font-size:72px;font-weight:700;letter-spacing:10px;line-height:1.1;}
+.hero h1 .name{background:linear-gradient(120deg,#e8bd7f,#f4dcae 45%,#dfa55a);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .role{margin-top:20px;font-size:17px;color:var(--dim);letter-spacing:4px;}
+.hero .role b{color:var(--text);font-weight:600;}
+.hero .meta{margin-top:12px;font-size:14px;color:var(--dim);letter-spacing:1px;}
+.hero .tagline{max-width:720px;margin:34px auto 0;font-size:15.5px;color:#b9bacb;line-height:2.1;}
+.cta{display:flex;gap:16px;justify-content:center;margin-top:42px;}
+.btn{display:inline-block;padding:13px 34px;border-radius:10px;font-size:14px;font-weight:600;letter-spacing:1px;border:1px solid var(--line);transition:.22s;}
+.btn.gold{background:linear-gradient(120deg,#dfa55a,#eed2a0);color:#171004;border:none;}
+.btn.gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(223,165,90,.22);}
+.btn.ghost{color:var(--dim);}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold);}
+
+/* 数据条 */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:900px;margin:0 auto;}
+.stat{padding:26px 10px;text-align:center;border-left:1px solid var(--line);}
+.stat:first-child{border-left:none;}
+.stat .num{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--gold);line-height:1;}
+.stat .lab{font-size:12px;color:var(--dim);letter-spacing:2px;margin-top:8px;}
+@media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}.stat:nth-child(3){border-left:none;}.stat:nth-child(n+3){border-top:1px solid var(--line);}}
+
+section{padding:86px 0;}
+.sec-head{text-align:center;margin-bottom:52px;}
+.sec-head .no{font-size:12px;color:var(--gold);letter-spacing:5px;}
+.sec-head h2{font-family:var(--serif);font-size:32px;font-weight:700;letter-spacing:4px;margin-top:10px;}
+.sec-head .sub{font-size:13.5px;color:var(--dim);margin-top:10px;letter-spacing:1px;}
+
+/* 关于 */
+.about-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
+.acard{border:1px solid var(--line);border-radius:14px;padding:30px 28px;background:var(--bg2);transition:.22s;}
+.acard:hover{border-color:var(--gold-soft);}
+.acard .no{font-family:var(--serif);font-size:15px;color:var(--gold);letter-spacing:2px;}
+.acard h3{font-size:16.5px;margin:14px 0 10px;font-weight:700;}
+.acard p{font-size:13.8px;color:var(--dim);}
+
+/* 技能 */
+.skills{display:flex;flex-wrap:wrap;gap:11px;justify-content:center;max-width:860px;margin:0 auto;}
+.chip{border:1px solid var(--line);border-radius:999px;padding:9px 20px;font-size:13.5px;color:var(--dim);background:var(--bg2);letter-spacing:1px;}
+.chip b{color:var(--gold);font-weight:600;}
+
+/* 作品（分类彩色编码） */
+.cat{margin-bottom:64px;--c:#dfa55a;}
+.cat:last-child{margin-bottom:0;}
+.cat .cat-head{display:flex;align-items:baseline;gap:16px;margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line);}
+.cat .cat-no{font-family:var(--serif);font-size:14px;color:var(--c);letter-spacing:2px;}
+.cat h3{font-size:18px;font-weight:700;letter-spacing:1px;}
+.cat .cat-desc{margin-left:auto;font-size:12.5px;color:var(--dim);letter-spacing:1px;}
+@media(max-width:640px){.cat .cat-desc{display:none;}}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:920px){.cards{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:620px){.cards{grid-template-columns:1fr;}}
+.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:14px;padding:24px 22px;background:var(--bg2);transition:.24s;position:relative;}
+.card:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 16px 40px rgba(0,0,0,.38);}
+.card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.card .tag{font-size:11px;color:var(--c);letter-spacing:2px;border:1px solid var(--c);border-radius:5px;padding:3px 10px;opacity:.9;}
+.card .idx{font-family:var(--serif);font-size:13px;color:var(--dim);}
+.card h4{font-size:16px;margin-bottom:9px;line-height:1.5;font-weight:700;}
+.card p{font-size:13.2px;color:var(--dim);flex:1;line-height:1.8;}
+.card .goto{margin-top:16px;font-size:12.5px;color:var(--c);letter-spacing:1px;opacity:.85;}
+.card:hover .goto{opacity:1;}
+
+/* 原型 */
+.proto{margin-bottom:30px;border:1px solid var(--line);border-radius:16px;padding:22px;background:var(--bg2);}
+.proto .phead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px;}
+.proto h4{font-size:15.5px;font-weight:700;letter-spacing:.5px;}
+.proto .btn{font-size:12.5px;padding:7px 18px;letter-spacing:1px;}
+iframe{width:100%;height:560px;border:1px solid var(--line);border-radius:12px;background:#0e0e16;display:block;}
+
+/* 页脚 */
+footer{border-top:1px solid var(--line);padding:52px 0;text-align:center;color:var(--dim);font-size:12.5px;letter-spacing:1px;}
+footer .big{font-family:var(--serif);font-size:17px;color:var(--text);letter-spacing:3px;margin-bottom:10px;}
+footer a{color:var(--gold);}
+footer .note{margin-top:14px;opacity:.65;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">吕森垚 <b>·</b> 作品集</div>
+    <div class="links">
+      <a href="#about">关于</a>
+      <a href="#skills">能力</a>
+      <a href="#works">作品</a>
+      <a href="#protos">原型</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="badge">GAME DESIGN · AI-NATIVE OPERATIONS</div>
+    <h1><span class="name">吕森垚</span></h1>
+    <div class="role">游戏策划 <b>GAME DESIGNER</b></div>
+    <div class="meta">山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+    <p class="tagline">以设计审美与 AI Agent 工作流驱动策划表达，能力覆盖系统、数值、关卡与运营的全链路。<br>从战术射击、MOBA 到 CRPG、JRPG 的多品类拆解，从赛季运营、商业化到数据复盘，多项核心设计已落地为可试玩原型。</p>
+    <div class="cta">
+      <a class="btn gold" href="#works">查看作品</a>
+      <a class="btn ghost" href="#protos">试玩原型</a>
+    </div>
+  </div>
+</header>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="num">6</div><div class="lab">能力板块</div></div>
+      <div class="stat"><div class="num">25</div><div class="lab">设计作品</div></div>
+      <div class="stat"><div class="num">2</div><div class="lab">可玩原型</div></div>
+      <div class="stat"><div class="num">1</div><div class="lab">垂直领域</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><div class="no">01</div><h2>关于我</h2><div class="sub">ABOUT</div></div>
+    <div class="about-grid">
+      <div class="acard">
+        <div class="no">01</div>
+        <h3>设计审美 × 策划逻辑</h3>
+        <p>数字媒体艺术专业训练了视觉与交互能力，以界面线框、原型与可视化文档，让设计可被清晰传达。</p>
+      </div>
+      <div class="acard">
+        <div class="no">02</div>
+        <h3>AI Agent 工作流</h3>
+        <p>理解多 Agent 协同架构（取数 / 指标 / 归因 / 成稿），以自然语言数据分析与自动化报表提升运营效率，保持对新技术的高频学习。</p>
+      </div>
+      <div class="acard">
+        <div class="no">03</div>
+        <h3>系统 / 数值 / 关卡 / 运营</h3>
+        <p>从策划案、数值建模到关卡设计，再到赛季运营与商业化，独立构建了覆盖全链路的设计作品。</p>
+      </div>
+      <div class="acard">
+        <div class="no">04</div>
+        <h3>多品类深度拆解</h3>
+        <p>持续拆解战术射击、MOBA、CRPG、JRPG 与动作手游，从现象级产品中提炼可复用的设计方法论。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><div class="no">02</div><h2>能力关键词</h2><div class="sub">SKILLS</div></div>
+    <div class="skills">
+      <span class="chip"><b>AI Agent</b> 工作流</span>
+      <span class="chip"><b>自然语言</b>数据分析</span>
+      <span class="chip"><b>自动化</b>报表</span>
+      <span class="chip"><b>赛季</b> 运营</span>
+      <span class="chip"><b>商业化</b> 定价</span>
+      <span class="chip"><b>数据</b> 复盘</span>
+      <span class="chip"><b>策划案</b> 与规则设计</span>
+      <span class="chip"><b>数值</b> 建模</span>
+      <span class="chip"><b>关卡</b> 与节奏</span>
+      <span class="chip"><b>拆解</b> 分析</span>
+      <span class="chip"><b>可玩原型</b> HTML / JS</span>
+      <span class="chip"><b>界面</b> 线框</span>
+    </div>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head"><div class="no">03</div><h2>作品精选</h2><div class="sub">SELECTED WORKS</div></div>
+
+    <div class="cat" style="--c:#dfa55a;">
+      <div class="cat-head"><span class="cat-no">A</span><h3>AI Agent 应用</h3><span class="cat-desc">1 份 · 运营提效 · 差异化方向</span></div>
+      <div class="cards">
+        <a class="card" href="作品/作品13_方案_多Agent游戏运营工作流.html" target="_blank">
+          <div class="top"><span class="tag">AI 应用方案</span><span class="idx">01</span></div>
+          <h4>多 Agent 游戏运营工作流</h4>
+          <p>Data / Metrics / Insight / Publisher 四 Agent 协同，把运营决策从小时级压缩到分钟级。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cat" style="--c:#6ba7ff;">
+      <div class="cat-head"><span class="cat-no">B</span><h3>运营策划 · 大型网游</h3><span class="cat-desc">6 份 · 对标《三角洲行动》 · 载体：虚构战术射击网游《边陲协议》</span></div>
+      <div class="cards">
+        <a class="card" href="大型网游运营方向/作品1_赛季运营方案.html" target="_blank">
+          <div class="top"><span class="tag">赛季运营</span><span class="idx">02</span></div>
+          <h4>赛季运营方案</h4>
+          <p>8 周三阶段节奏、排位软重置、新地图与武器内容更新规划。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="大型网游运营方向/作品2_战斗通行证商业化方案.html" target="_blank">
+          <div class="top"><span class="tag">商业化</span><span class="idx">03</span></div>
+          <h4>战斗通行证方案</h4>
+          <p>68/98 定价、免费与付费线设计、性价比测算与完成率设计。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="大型网游运营方向/作品3_皮肤外观商业化方案.html" target="_blank">
+          <div class="top"><span class="tag">商业化</span><span class="idx">04</span></div>
+          <h4>皮肤外观方案</h4>
+          <p>品质分层、限时稀缺、抽奖合规与零数值通胀设计。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="大型网游运营方向/作品5_反作弊与生态治理方案.html" target="_blank">
+          <div class="top"><span class="tag">生态治理</span><span class="idx">05</span></div>
+          <h4>反作弊与生态治理</h4>
+          <p>预防-检测-处罚-申诉四层治理与信誉分系统，保障竞技公平。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="大型网游运营方向/作品4_节假日大版本活动案.html" target="_blank">
+          <div class="top"><span class="tag">活动策划</span><span class="idx">06</span></div>
+          <h4>大版本活动与召回</h4>
+          <p>春节大版本四件套：限时模式、福利、限定皮肤与流失召回。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="大型网游运营方向/作品6_赛季数据复盘.html" target="_blank">
+          <div class="top"><span class="tag">数据分析</span><span class="idx">07</span></div>
+          <h4>赛季数据复盘</h4>
+          <p>结果对照、曲线定位、归因与改进，完整的复盘方法论。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cat" style="--c:#5ccb6a;">
+      <div class="cat-head"><span class="cat-no">C</span><h3>运营策划 · 移动端卡牌</h3><span class="cat-desc">6 份 · 载体：虚构二次元卡牌手游《星野物语》</span></div>
+      <div class="cards">
+        <a class="card" href="运营策划方向/作品1_开服七日签到活动案.html" target="_blank">
+          <div class="top"><span class="tag">活动策划</span><span class="idx">08</span></div>
+          <h4>开服七日签到</h4>
+          <p>奖励锚点、防刷设计与付费钩子，完整的留存活动方案。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="运营策划方向/作品2_限时累充返利活动案.html" target="_blank">
+          <div class="top"><span class="tag">商业化</span><span class="idx">09</span></div>
+          <h4>限时累充返利</h4>
+          <p>档位设计、返利测算、合规与防薅。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="运营策划方向/作品3_商业化方案_月卡与通行证.html" target="_blank">
+          <div class="top"><span class="tag">商业化</span><span class="idx">10</span></div>
+          <h4>月卡与通行证</h4>
+          <p>定价、性价比测算与付费结构全景。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="运营策划方向/作品4_版本排期_30天运营日历.html" target="_blank">
+          <div class="top"><span class="tag">版本排期</span><span class="idx">11</span></div>
+          <h4>30 天运营日历</h4>
+          <p>活动接档、节假日锚点，留存与付费活动的错峰排布。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="运营策划方向/作品5_数据复盘_活动效果.html" target="_blank">
+          <div class="top"><span class="tag">数据分析</span><span class="idx">12</span></div>
+          <h4>活动效果数据复盘</h4>
+          <p>复盘框架、漏斗定位与归因改进。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="运营策划方向/作品6_活动拆解_明日方舟危机合约.html" target="_blank">
+          <div class="top"><span class="tag">活动拆解</span><span class="idx">13</span></div>
+          <h4>明日方舟危机合约</h4>
+          <p>自选难度设计的可迁移方法论。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cat" style="--c:#c084fc;">
+      <div class="cat-head"><span class="cat-no">D</span><h3>深度拆解 · 多品类</h3><span class="cat-desc">8 份 · 射击 · MOBA · CRPG · JRPG · 动作手游</span></div>
+      <div class="cards">
+        <a class="card" href="作品/作品6_案例拆解_三角洲行动.html" target="_blank">
+          <div class="top"><span class="tag">案例拆解</span><span class="idx">14</span></div>
+          <h4>《三角洲行动》</h4>
+          <p>撤离射击的"风险经济学"沙盒——核心循环、玩家驱动市场、可选交战如何容纳两类玩家。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品1_案例拆解_吸血鬼幸存者.html" target="_blank">
+          <div class="top"><span class="tag">案例拆解</span><span class="idx">15</span></div>
+          <h4>《吸血鬼幸存者》</h4>
+          <p>把"构筑"做进"闪避"的自动战斗，五层拆解与三条可迁移设计原则。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品7_版本拆解_Dota2大展宏图.html" target="_blank">
+          <div class="top"><span class="tag">版本拆解</span><span class="idx">16</span></div>
+          <h4>Dota 2 "大展宏图" 7.33</h4>
+          <p>地图扩大 40% 与一整套中立资源点，用空间目标重塑对抗密度的版本重做。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品8_案例拆解_Deadlock.html" target="_blank">
+          <div class="top"><span class="tag">案例拆解</span><span class="idx">17</span></div>
+          <h4>Deadlock</h4>
+          <p>射击手感与 MOBA 经济的融合实验——"灵魂球"如何翻译补刀。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品9_案例拆解_博德之门3.html" target="_blank">
+          <div class="top"><span class="tag">案例拆解</span><span class="idx">18</span></div>
+          <h4>博德之门 3</h4>
+          <p>把"什么都能试"卖成大众爆款：涌现式自由、骰子可视化与同伴系统。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品10_案例拆解_女神异闻录5.html" target="_blank">
+          <div class="top"><span class="tag">案例拆解</span><span class="idx">19</span></div>
+          <h4>女神异闻录 5</h4>
+          <p>日历系统与风格化 UI 的双重设计资产——时间管理玩法的缝合术。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品11_对比分析_崩坏3第一部与第二部.html" target="_blank">
+          <div class="top"><span class="tag">对比分析</span><span class="idx">20</span></div>
+          <h4>崩坏 3 第一部与第二部</h4>
+          <p>老 IP 的软重启方法论：星之环兼容层、新主角入口与技术换底。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品12_版本分析_崩坏3往世乐土.html" target="_blank">
+          <div class="top"><span class="tag">版本分析</span><span class="idx">21</span></div>
+          <h4>崩坏 3 往世乐土</h4>
+          <p>动作手游里的构筑型 Roguelite：用刻印给固定角色二次随机化。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cat" style="--c:#5ee0d0;">
+      <div class="cat-head"><span class="cat-no">E</span><h3>策划设计</h3><span class="cat-desc">3 份 · 系统策划 · 关卡策划 · 概念设计</span></div>
+      <div class="cards">
+        <a class="card" href="作品/作品2_系统策划案_爬塔Roguelike.html" target="_blank">
+          <div class="top"><span class="tag">系统策划</span><span class="idx">22</span></div>
+          <h4>《回廊之塔》爬塔系统案</h4>
+          <p>移动端 Roguelike 完整策划案：核心循环、七大系统、界面布局、配置表与异常清单。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品4_关卡设计_新手教学关.html" target="_blank">
+          <div class="top"><span class="tag">关卡策划</span><span class="idx">23</span></div>
+          <h4>《遗迹入口》教学关</h4>
+          <p>12×8 新手教学关：隐性引导、节奏曲线与迭代记录，配套可玩原型。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/作品5_一页纸GDD_潮汐农场.html" target="_blank">
+          <div class="top"><span class="tag">概念设计</span><span class="idx">24</span></div>
+          <h4>一页纸 GDD《潮汐农场》</h4>
+          <p>白天种田、夜晚守塔——用一页纸讲清核心支柱、循环与差异化。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cat" style="--c:#9aa0b4;">
+      <div class="cat-head"><span class="cat-no">F</span><h3>数值与可玩原型</h3><span class="cat-desc">数值策划 · 可玩验证</span></div>
+      <div class="cards">
+        <a class="card" href="作品/作品3_数值设计_成长曲线与战斗公式.html" target="_blank">
+          <div class="top"><span class="tag">数值策划</span><span class="idx">25</span></div>
+          <h4>成长曲线与战斗公式</h4>
+          <p>乘法减伤公式选型、成长曲线推导与经济模型，附 1-30 级数值表与敏感度分析。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
+        <a class="card" href="作品/原型_数值模拟器.html" target="_blank">
+          <div class="top"><span class="tag">可玩原型</span><span class="idx">26</span></div>
+          <h4>数值模拟器</h4>
+          <p>拖动滑杆实时调公式，观察金币 / DPS 曲线与升级回本时间。</p>
+          <span class="goto">直接试玩 →</span>
+        </a>
+        <a class="card" href="作品/原型_关卡原型.html" target="_blank">
+          <div class="top"><span class="tag">可玩原型</span><span class="idx">27</span></div>
+          <h4>关卡原型</h4>
+          <p>WASD 移动、集钥匙开门的完整教学关，与关卡文档一一对应。</p>
+          <span class="goto">直接试玩 →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="protos">
+  <div class="wrap">
+    <div class="sec-head"><div class="no">04</div><h2>可玩原型</h2><div class="sub">PLAYABLE PROTOTYPES</div></div>
+
+    <div class="proto">
+      <div class="phead">
+        <h4>数值模拟器 · 挂机矿场</h4>
+        <a class="btn ghost" href="作品/原型_数值模拟器.html" target="_blank">新窗口打开 ↗</a>
+      </div>
+      <iframe src="作品/原型_数值模拟器.html" loading="lazy" title="数值模拟器"></iframe>
+    </div>
+
+    <div class="proto">
+      <div class="phead">
+        <h4>关卡原型 · 遗迹入口</h4>
+        <a class="btn ghost" href="作品/原型_关卡原型.html" target="_blank">新窗口打开 ↗</a>
+      </div>
+      <iframe src="作品/原型_关卡原型.html" loading="lazy" title="关卡原型"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="big">吕森垚 · 游戏策划作品集</div>
+    <div>山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+    <div class="note">正式文档版：<a href="作品集_吕森垚.html" target="_blank">作品集_吕森垚</a> · 本作品集所有内容为个人独立创作，涉及示例数据均已在对应文档内标注为设计假设。</div>
+  </div>
+</footer>
+
+</body>
+</html>

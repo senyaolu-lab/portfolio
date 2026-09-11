@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案：多 Agent 游戏运营工作流 —— 从"小时级"到"分钟级"的运营提效设计 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>方案：多 Agent 游戏运营工作流 —— 从"小时级"到"分钟级"的运营提效设计</h1>
+<blockquote>作品类型：AI 应用方案 | 作者：吕森垚 | 版本 v1.0<br>方案性质：基于 Agent 技术公开资料与个人实践整理的设计方案。</blockquote>
+<hr>
+<h2>0. 背景与目标</h2>
+<p>游戏运营中存在大量重复劳动：提数、算指标、盯监控、写日报。传统流程依赖人工取数，一次归因动辄以小时计。本方案提出一套<strong>多 Agent 协同架构</strong>，替代人工取数、复盘与监控，将运营决策从"小时级"压缩到"分钟级"，核心指向 ROI 优化。</p>
+<h2>1. Agent 分工与工作流</h2>
+<table><thead><tr><th>Agent</th><th>职责</th><th>输入</th><th>输出</th></tr></thead><tbody><tr><td>Data Agent</td><td>跨数据源抽数、清洗、口径统一</td><td>自然语言提问 / 定时任务</td><td>结构化数据集</td></tr><tr><td>Metrics Agent</td><td>核心 KPI 计算、环比与同比</td><td>结构化数据集</td><td>指标表与趋势</td></tr><tr><td>Insight Agent</td><td>异常检测、波动定位与归因</td><td>指标与事件数据</td><td>归因结论与建议</td></tr><tr><td>Publisher Agent</td><td>日报 / 周报自动生成与推送</td><td>归因结论</td><td>可读报告与推送</td></tr></tbody></table>
+<p>工作流：运营人员用自然语言提问 → Data Agent 取数 → Metrics Agent 计算 → Insight Agent 归因 → Publisher Agent 成稿推送，全程秒级返回结论，替代传统提数流程。运营人员的角色从"执行者"转变为"规则制定者与审校者"。</p>
+<h2>2. 四大落地场景</h2>
+<h3>2.1 全链路数据洞察自动化</h3>
+<ul><li><strong>现状痛点</strong>：提数、算指标、写日报占用运营大量时间，且口径不一致；</li><li><strong>Agent 方案</strong>：四个 Agent 串行协作，运营仅以自然语言提问，秒级获取数据结论；</li><li><strong>预期效果</strong>：一次数据结论从小时级到秒级，日报 / 周报自动生成。</li></ul>
+<h3>2.2 买量投放与竞价优化</h3>
+<ul><li><strong>现状痛点</strong>：投放数据延迟高、素材制作周期长、算力成本高；</li><li><strong>Agent 方案</strong>：准实时动态调整投放策略，数据延迟从小时级压缩至 <strong>2 分钟以内</strong>；智能竞价模型自动优化出价与素材匹配；调度 <strong>GPU 低谷时段</strong>批量生成买量素材；</li><li><strong>预期效果</strong>：降低算力成本与素材制作周期，提升买量 ROI。</li></ul>
+<h3>2.3 玩家反馈与舆情闭环</h3>
+<ul><li><strong>现状痛点</strong>：人工爬帖、人工归因效率低且易漏报；</li><li><strong>Agent 方案</strong>：7×24 轮询全平台玩家评论与社区反馈；多模态 Agent 识别负面情绪与核心吐槽点；自动关联对应时间节点的游戏内 Bug、活动更新等事件，输出<strong>带时序关联的复盘报告</strong>；</li><li><strong>预期效果</strong>：替代人工爬帖与人工归因，舆情响应从小时级到分钟级。</li></ul>
+<h3>2.4 活动自动化运营</h3>
+<ul><li><strong>现状痛点</strong>：活动配置与监控依赖人工盯盘，峰值期压力大；</li><li><strong>Agent 方案</strong>：活动配置、参数调整、数据监控、效果复盘全流程由 Agent 按规则执行；异常数据自动告警并触发预案；大型活动峰值期弹性扩缩容应对计算压力；</li><li><strong>预期效果</strong>：活动运营从"人盯数据"变为"人审结论"。</li></ul>
+<h2>3. 自动化看板与报表体系</h2>
+<ul><li><strong>三级看板</strong>：高管层（北极星指标）、运营层（活动与留存）、执行层（异常告警）；</li><li><strong>报表体系</strong>：日报、周报、活动结案报告由 Publisher Agent 按模板自动生成；</li><li><strong>告警体系</strong>：指标阈值与异常检测双轨告警，自动联动预案。</li></ul>
+<h2>4. 岗位要求对照（我对大厂要求的理解）</h2>
+<table><thead><tr><th>大厂岗位核心要求</th><th>我的对应</th></tr></thead><tbody><tr><td>理解游戏运营指标体系</td><td>留存、付费、活跃等指标贯穿本作品集全部运营方案（大型网游与卡牌两个方向共 12 份）</td></tr><tr><td>能基于业务场景拆解 Agent 分工与工作流</td><td>本文第 1 节四个 Agent 的职责划分与串联逻辑</td></tr><tr><td>具备自然语言数据分析能力</td><td>本文 2.1 的提问式取数流程设计，以及个人实践中用 Agent 辅助归因与策略验证</td></tr><tr><td>有搭建自动化运营看板、自动化报表体系的经验</td><td>本文第 3 节的三级看板与自动报表设计</td></tr></tbody></table>
+<h2>5. 我的实践</h2>
+<p>本作品集全部作品的创作过程即一套个人 Agent 工作流：拆解初稿、数值模拟、文档校验由 AI Agent 辅助执行，我负责设计判断、人工审改与定稿。这正是本方案的核心立场——<strong>把重复劳动交给 Agent，把人留给判断</strong>。</p>
+<h2>6. 风险与边界</h2>
+<table><thead><tr><th>风险</th><th>对策</th></tr></thead><tbody><tr><td>数据口径不一致</td><td>Data Agent 统一口径字典，先清洗后计算</td></tr><tr><td>Agent 输出幻觉</td><td>关键结论人工复核，异常报告附可追溯的数据明细</td></tr><tr><td>自动化过度导致失察</td><td>保留人工决策节点，Agent 只产出建议与执行清单</td></tr><tr><td>算力与成本</td><td>GPU 低谷调度与小模型优先，控制单次调用成本</td></tr></tbody></table>
+<h2>7. 结论</h2>
+<p>多 Agent 运营工作流的本质，是把运营的重复劳动外包给机器，把人留给判断与策略。本方案用于展示我对 AI Agent 在游戏运营中落地路径的理解，以及持续学习新技术的意愿。</p>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

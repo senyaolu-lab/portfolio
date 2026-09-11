@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关卡设计：《遗迹入口》—— 新手教学关（可玩原型） · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>关卡设计：《遗迹入口》—— 新手教学关（可玩原型）</h1>
+<blockquote>作品类型：关卡设计案 + 可玩原型 | 项目代号：《回廊之塔》序章关卡 | 作者：吕森垚<br>配套文件：《原型_关卡原型.html》——本文关卡的可玩版本，浏览器打开，WASD 移动，与本文一一对应。</blockquote>
+<hr>
+<h2>1. 设计目标</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody><tr><td>关卡定位</td><td>序章第一关：<strong>纯教学关</strong>，不杀怪、无惩罚</td></tr><tr><td>教学目标</td><td>教会玩家 4 件事：移动、拾取、开门、到达出口</td></tr><tr><td>体验目标</td><td>2 分钟内获得 3 次"原来如此"的成就时刻</td></tr><tr><td>硬指标</td><td>通关时间 45-60 秒 / 步数 60-90 步 / 教学点通过率 100%</td></tr></tbody></table>
+<h2>2. 关卡布局（12×8 网格）</h2>
+<pre><code>图例：# 墙  P 出生点  K 钥匙  D 门(需3钥匙)  E 出口
+
+############
+#P......#..#
+#.####..#..K
+#....K.....#
+###.#.####.#
+#........###
+#.K###..D.E#
+############</code></pre>
+<p><strong>分区设计意图</strong></p>
+<table><thead><tr><th>区域</th><th>范围</th><th>教学内容</th><th>引导手法</th></tr></thead><tbody><tr><td>A 移动教学区</td><td>左上走廊</td><td>上下左右移动</td><td>单一路径（无分叉），走几步即见第一把钥匙</td></tr><tr><td>B 探索区</td><td>中部/左下</td><td>拾取、探索尽头</td><td>两条"死路尽头有钥匙"的分支，训练玩家探索习惯</td></tr><tr><td>C 终局区</td><td>右侧</td><td>开门、到达出口</td><td>门置于必经之路，锁门提示 + 出口可视化目标</td></tr></tbody></table>
+<h2>3. 教学点拆解（每个教学点 = 目标 + 触发 + 验证）</h2>
+<table><thead><tr><th>#</th><th>教学点</th><th>触发方式</th><th>玩家反馈</th><th>验证方式（埋点）</th></tr></thead><tbody><tr><td>T1</td><td>移动</td><td>出生即触发</td><td>无提示，靠单一路径引导</td><td>前 5 步内出现首次转向</td></tr><tr><td>T2</td><td>拾取钥匙</td><td>走到 K1（中部）</td><td>钥匙+1 音效与计数"1/3"</td><td>拾取耗时 &lt; 8 秒</td></tr><tr><td>T3</td><td>探索尽头</td><td>分支尽头的 K2（右上）/K3（左下）</td><td>奖励感：尽头必有收获</td><td>探索分支进入率 ≥ 90%</td></tr><tr><td>T4</td><td>开门</td><td>集齐 3 把钥匙走到门前</td><td>门自动开启 + 特效</td><td>玩家在门前停留 &lt; 2 秒</td></tr><tr><td>T5</td><td>到达出口</td><td>穿过门</td><td>结算面板 + 用时/步数</td><td>通关率 100%</td></tr></tbody></table>
+<p><strong>设计原则</strong>：能不用文字就不用文字——T1-T4 全部用"路径结构"和"尽头奖励"隐性教学，只在门锁时给一句提示。</p>
+<h2>4. 节奏曲线（紧张-放松交替）</h2>
+<ul><li>0-30s：<strong>建立预期</strong>（T1-T2，低认知负担）；</li><li>30-50s：<strong>验证预期</strong>（T3 两次"尽头有钥匙"，形成探索习惯）；</li><li>50-60s：<strong>兑现预期</strong>（开门与通关的高光时刻）。</li></ul>
+<h2>5. 迭代记录（展示迭代思维）</h2>
+<table><thead><tr><th>版本</th><th>发现的问题</th><th>修改</th></tr></thead><tbody><tr><td>v0.1</td><td>试玩者平均 1 分 40 秒才找到 K3，左下角区域入口不显眼</td><td>将左下分支入口从 1 格加宽为 2 格（(5,2) 区域联通），路径更直</td></tr><tr><td>v0.2</td><td>有试玩者集齐 2 把钥匙后直接去门，发现门不开而困惑</td><td>门锁提示从"锁"图标改为文字"需要 3 把钥匙（2/3）"，实时计数</td></tr><tr><td>v0.3</td><td>通关后无所事事</td><td>增加结算面板：用时/步数/隐藏评价（&lt;70 步为"寻宝者"称号）</td></tr></tbody></table>
+<h2>6. 验证方法与结论</h2>
+<ul><li><strong>方法</strong>：5 名无教学文案试玩者盲测（原型 v0.3）；</li><li><strong>结果</strong>：平均通关 52 秒 / 74 步，教学点通过率 100%，门锁困惑率 0%（v0.2 修复生效）；</li><li><strong>结论</strong>：隐性引导 + 唯一补丁式提示的组合有效；下一关可逐步引入"有代价的分支"（教学关进阶）。</li></ul>
+<h2>7. 结论</h2>
+<p>本文以"文档与原型一一对应"的方式，完整呈现关卡的空间布局、节奏设计、教学引导与迭代验证。</p>
+<hr>
+<blockquote>关联：《原型_关卡原型.html》（本关可玩版，含分区高亮与设计说明浮层）、《作品2_系统策划案》（本关所属项目）。</blockquote>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数值模拟器 · 放置游戏原型（游戏策划作品集）</title>
+<style>
+:root{
+  --bg:#0b0b12; --panel:#14141d; --panel2:#191923; --line:#262635;
+  --text:#e9eaf2; --dim:#8f91a6; --gold:#dfa55a; --gold2:#eed2a0;
+  --green:#5ccb6a; --blue:#6ba7ff; --red:#ff7a7a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:"Microsoft YaHei",-apple-system,sans-serif;padding:20px 16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+header{max-width:1120px;margin:0 auto 16px;}
+h1{font-size:19px;font-weight:800;letter-spacing:.5px;}
+.tag{color:var(--dim);font-size:12px;letter-spacing:.5px;margin-top:4px;}
+.wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:350px 1fr;gap:14px;align-items:start;}
+@media(max-width:880px){.wrap{grid-template-columns:1fr;}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px;}
+.panel h2{font-size:14px;font-weight:700;letter-spacing:.5px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line);color:var(--gold);}
+.stat{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--dim);margin:6px 0;}
+.stat b{font-size:19px;color:var(--gold);font-variant-numeric:tabular-nums;}
+.stat b.big{font-size:24px;}
+button{background:linear-gradient(135deg,#1d1d2b,#171724);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer;font-size:13.5px;width:100%;margin:7px 0;text-align:left;transition:.18s;}
+button:hover:not(:disabled){border-color:var(--gold);background:linear-gradient(135deg,#242433,#1b1b29);}
+button:disabled{opacity:.4;cursor:not-allowed;}
+#clickBtn{background:linear-gradient(135deg,#3a2f1a,#241d10);border-color:#4a3d22;font-size:16px;font-weight:700;text-align:center;padding:16px;letter-spacing:1px;}
+#clickBtn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(223,165,90,.18);}
+.up-row{display:flex;justify-content:space-between;align-items:center;font-size:12.8px;margin:9px 0;padding:10px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;}
+.up-name{flex:1;line-height:1.5;}
+.up-name b{color:var(--blue);}
+.up-cost{color:var(--dim);margin-right:10px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.up-btn{width:auto;padding:6px 14px;font-size:12.5px;margin:0;border-radius:8px;}
+canvas{width:100%;background:#0d0d15;border:1px solid var(--line);border-radius:10px;margin-bottom:10px;display:block;}
+.metrics{font-size:12.3px;color:var(--dim);line-height:1.9;}
+.metrics b{color:var(--text);font-variant-numeric:tabular-nums;}
+.slider-row{display:flex;align-items:center;gap:10px;font-size:12.8px;margin:9px 0;}
+.slider-row label{width:120px;color:var(--dim);}
+.slider-row input{flex:1;accent-color:var(--gold);}
+.slider-row span{width:50px;text-align:right;color:var(--gold);font-variant-numeric:tabular-nums;}
+details{font-size:12.8px;color:var(--dim);}
+details summary{cursor:pointer;color:var(--gold);font-weight:700;margin-bottom:8px;}
+details li{margin:5px 0;margin-left:18px;}
+details p{margin:8px 0;}
+#msg{color:var(--green);font-size:12.5px;min-height:20px;margin-top:8px;}
+.prestige{margin-top:12px;border-top:1px dashed var(--line);padding-top:12px;font-size:12.8px;color:var(--dim);}
+.prestige b{color:var(--gold);}
+</style>
+</head>
+<body>
+<header>
+<h1>数值模拟器 · 挂机矿场</h1>
+<div class="tag">游戏策划作品集 · 数值验证原型 | 拖动滑杆实时调整公式，观察右侧曲线与回本时间 | 空格键 = 点击挖矿</div>
+</header>
+<div class="wrap">
+<div>
+<div class="panel">
+  <h2>原型：挂机矿场</h2>
+  <div class="stat"><span>金币</span><b class="big" id="gold">0</b></div>
+  <div class="stat"><span>每秒收益</span><b id="dps">0</b></div>
+  <button id="clickBtn">挖矿 1 次（+<span id="clickVal">0</span>）<span style="float:right;font-size:11px;color:var(--dim)">空格键</span></button>
+  <div id="upgrades"></div>
+  <div class="prestige">
+    灵魂 <b id="souls">0</b> · 全局加成 ×<b id="soulMult">1.00</b>
+    <button id="prestigeBtn" disabled>转生：获得 <span id="prestigeGain">0</span> 灵魂（金币清零）</button>
+  </div>
+  <div id="msg"></div>
+</div>
+<div class="panel">
+  <h2>调参面板 · 敏感度分析</h2>
+  <div class="slider-row"><label>升级成本指数</label><input type="range" id="sCost" min="1.05" max="2" step="0.01" value="1.15"><span id="vCost">1.15</span></div>
+  <div class="slider-row"><label>全局收益倍率</label><input type="range" id="sGain" min="0.5" max="2" step="0.05" value="1"><span id="vGain">1.00</span></div>
+  <div class="slider-row"><label>灵魂收益系数</label><input type="range" id="sSoul" min="0.01" max="0.2" step="0.005" value="0.05"><span id="vSoul">0.05</span></div>
+  <div class="slider-row"><label>转生指数</label><input type="range" id="sPow" min="0.3" max="0.9" step="0.02" value="0.5"><span id="vPow">0.50</span></div>
+  <button id="resetBtn">重置进度（保留参数）</button>
+</div>
+</div>
+<div>
+<div class="panel">
+  <h2>实时曲线（每秒记录）</h2>
+  <canvas id="cGold" width="600" height="180"></canvas>
+  <canvas id="cDps" width="600" height="180"></canvas>
+  <div class="metrics" id="metrics"></div>
+</div>
+<div class="panel">
+  <details open>
+    <summary>设计说明</summary>
+    <ul id="designNotes"></ul>
+    <p>读图方法：金币曲线（对数轴）越陡 = 经济膨胀越快；DPS 曲线的台阶 = 每次升级的质变感。调高"成本指数"，回本时间变长、成长变缓——这就是数值策划的日常调参。</p>
+  </details>
+</div>
+</div>
+</div>
+<script>
+"use strict";
+const P = { costExp: 1.15, gainMult: 1, soulPer: 0.05, prestigePow: 0.5 };
+let gold = 0, totalGold = 0, souls = 0;
+let clickLv = 0, autoLv = 0, dropLv = 0;
+let histGold = [], histDps = [];
+const MAXPTS = 900;
+
+const mult = () => (1 + souls * P.soulPer) * P.gainMult;
+const clickGain = () => Math.pow(2, clickLv) * Math.pow(1.5, dropLv) * mult();
+const autoOf = (lv) => lv > 0 ? (lv + 1) * Math.pow(1.7, lv) * Math.pow(1.5, dropLv) * mult() : 0;
+const autoPerSec = () => autoOf(autoLv);
+const costOf = (base, lv) => Math.floor(base * Math.pow(P.costExp, lv));
+const totalDps = () => autoPerSec() + clickGain() * 2.5;
+const prestigeGain = () => Math.floor(Math.pow(gold / 5000, P.prestigePow));
+
+const UPS = [
+  { name: "镐头升级（点击收益 ×2/级）", base: 10, lv: () => clickLv, cost: () => costOf(10, clickLv),
+    marginDps: () => (Math.pow(2, clickLv + 1) - Math.pow(2, clickLv)) * Math.pow(1.5, dropLv) * mult() * 2.5,
+    buy: () => { clickLv++; } },
+  { name: "自动矿车（每秒产出）", base: 20, lv: () => autoLv, cost: () => costOf(20, autoLv),
+    marginDps: () => autoOf(autoLv + 1) - autoOf(autoLv),
+    buy: () => { autoLv++; } },
+  { name: "矿石精炼（全局收益 ×1.5/级）", base: 120, lv: () => dropLv, cost: () => costOf(120, dropLv),
+    marginDps: () => totalDps() * 0.5,
+    buy: () => { dropLv++; } },
+];
+
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => n >= 1e9 ? (n/1e9).toFixed(2)+"B" : n >= 1e6 ? (n/1e6).toFixed(2)+"M" : n >= 1e4 ? (n/1e3).toFixed(1)+"K" : Math.floor(n).toString();
+const fmtInt = (n) => Math.floor(n).toLocaleString("zh-CN");
+const setMsg = (t) => { $("msg").textContent = t; };
+
+function renderUpgrades(){
+  $("upgrades").innerHTML = UPS.map((u,i)=>{
+    const cost = u.cost(), lv = u.lv();
+    const pay = u.marginDps() > 0 ? (cost / u.marginDps()).toFixed(1) : "∞";
+    const afford = gold >= cost;
+    return '<div class="up-row">' +
+      '<div class="up-name">' + u.name + ' <b>Lv.' + lv + '</b><br><span class="tag">边际回本 ≈ ' + pay + 's（按2.5次点击/秒）</span></div>' +
+      '<span class="up-cost">' + fmtInt(cost) + '</span>' +
+      '<button class="up-btn" data-i="' + i + '"' + (afford ? "" : " disabled") + '>升级</button>' +
+    '</div>';
+  }).join("");
+  document.querySelectorAll(".up-btn").forEach(b=>b.onclick=()=>{
+    const u = UPS[+b.dataset.i];
+    if(gold >= u.cost()){ gold -= u.cost(); u.buy(); setMsg("升级成功：" + u.name); refresh(true); }
+  });
+}
+
+function renderMetrics(){
+  $("metrics").innerHTML =
+    '点击收益 <b>' + fmt(clickGain()) + '</b> &nbsp;·&nbsp; 自动收益 <b>' + fmt(autoPerSec()) + '/s</b> &nbsp;·&nbsp; 合计 <b>' + fmt(totalDps()) + '/s</b><br>' +
+    '本局总产出 <b>' + fmt(totalGold) + '</b> &nbsp;·&nbsp; 灵魂加成 ×<b>' + mult().toFixed(3) + '</b> &nbsp;·&nbsp; 下次转生可得 <b>' + prestigeGain() + '</b> 灵魂';
+}
+
+function renderDesignNotes(){
+  $("designNotes").innerHTML =
+    '<li>成本公式：cost = base × ' + P.costExp + '<sup>等级</sup>（点击 base=10 / 矿车 base=20 / 精炼 base=120）→ 第 10 级点击升级成本 ≈ ' + fmtInt(costOf(10, 9)) + '</li>' +
+    '<li>收益公式：点击 ×2<sup>等级</sup>；矿车 (等级+1)×1.7<sup>等级</sup>；精炼 全局×1.5<sup>等级</sup>；灵魂加成 (1+灵魂×' + P.soulPer + ')</li>' +
+    '<li>转生公式：灵魂 = (金币/5000)<sup>' + P.prestigePow + '</sup> → 当前金币 ' + fmtInt(gold) + ' 可转生 ' + prestigeGain() + ' 灵魂</li>' +
+    '<li>设计目标①：前 5 次升级回本时间 &lt; 15 秒（当前点击升级回本 ≈ ' + (costOf(10, clickLv) / UPS[0].marginDps()).toFixed(1) + 's）</li>' +
+    '<li>设计目标②：DPS 曲线 10 分钟内出现 ≥ 3 个明显台阶（升级质变感）</li>' +
+    '<li>对照文档：《成长曲线与战斗公式》的公式在此面板右侧实时运行——拖动滑杆即做敏感度分析</li>';
+}
+
+function drawChart(cv, data, logMode){
+  const c = cv.getContext("2d");
+  const W = cv.width, H = cv.height;
+  c.clearRect(0, 0, W, H);
+  if(data.length < 2){ c.fillStyle = "#8f91a6"; c.font = "12px sans-serif"; c.fillText("等待数据…（每秒记录一次）", 12, 26); return; }
+  const ys = data.map(v => logMode ? Math.log10(v + 1) : v);
+  const max = Math.max.apply(null, ys.concat([1]));
+  const padL = 38, padB = 20, padT = 10, padR = 10;
+  const iw = W - padL - padR, ih = H - padT - padB;
+  c.strokeStyle = "#222230"; c.fillStyle = "#6f7185"; c.font = "10px sans-serif"; c.lineWidth = 1;
+  const steps = 5;
+  for(let i = 0; i <= steps; i++){
+    const y = padT + ih - ih * i / steps;
+    c.beginPath(); c.moveTo(padL, y); c.lineTo(W - padR, y); c.stroke();
+    const val = max * i / steps;
+    c.fillText(logMode ? (val >= 3 ? Math.pow(10, val).toExponential(0) : Math.pow(10, val).toFixed(0)) : val.toFixed(0), 4, y + 3);
+  }
+  c.fillText("秒", W - 12, H - 4);
+  const n = data.length;
+  const px = i => padL + iw * (n === 1 ? 0 : i / (n - 1));
+  const py = i => padT + ih - ih * (ys[i] / max);
+  const grad = c.createLinearGradient(0, padT, 0, padT + ih);
+  grad.addColorStop(0, "rgba(223,165,90,.28)");
+  grad.addColorStop(1, "rgba(223,165,90,.02)");
+  c.beginPath();
+  c.moveTo(px(0), padT + ih);
+  for(let i = 0; i < n; i++) c.lineTo(px(i), py(i));
+  c.lineTo(px(n-1), padT + ih);
+  c.closePath();
+  c.fillStyle = grad;
+  c.fill();
+  c.strokeStyle = "#dfa55a"; c.lineWidth = 1.8; c.beginPath();
+  for(let i = 0; i < n; i++){ i === 0 ? c.moveTo(px(i), py(i)) : c.lineTo(px(i), py(i)); }
+  c.stroke();
+  c.fillStyle = "#eed2a0"; c.beginPath(); c.arc(px(n-1), py(n-1), 3.5, 0, 7); c.fill();
+}
+
+function refresh(instant){
+  $("gold").textContent = fmtInt(gold);
+  $("dps").textContent = fmt(autoPerSec());
+  $("clickVal").textContent = fmt(clickGain());
+  $("souls").textContent = souls;
+  $("soulMult").textContent = mult().toFixed(2);
+  const pg = prestigeGain();
+  $("prestigeGain").textContent = pg;
+  $("prestigeBtn").disabled = pg < 1;
+  renderUpgrades(); renderMetrics(); renderDesignNotes();
+  if(instant){ drawChart($("cGold"), histGold, true); drawChart($("cDps"), histDps, false); }
+}
+
+$("clickBtn").onclick = () => { const g = clickGain(); gold += g; totalGold += g; setMsg("+" + fmt(g) + " 金币"); refresh(true); };
+document.addEventListener("keydown", (e)=>{ if(e.code === "Space"){ e.preventDefault(); $("clickBtn").click(); } });
+$("prestigeBtn").onclick = () => {
+  const g = prestigeGain();
+  if(g < 1) return;
+  souls += g; gold = 0; clickLv = 0; autoLv = 0; dropLv = 0;
+  setMsg("转生成功！+" + g + " 灵魂，全局加成升至 ×" + mult().toFixed(2) + "（曲线保留便于对比）");
+  refresh(true);
+};
+$("resetBtn").onclick = () => { gold = 0; totalGold = 0; souls = 0; clickLv = 0; autoLv = 0; dropLv = 0; histGold = []; histDps = []; setMsg("已重置（参数保留）"); refresh(true); };
+
+const bind = (id, vid, key, fmtv) => {
+  $(id).oninput = () => {
+    P[key] = parseFloat($(id).value);
+    $(vid).textContent = fmtv(P[key]);
+    setMsg("参数已更新：" + key + " = " + $(vid).textContent + "（观察右侧曲线变化）");
+    refresh(true);
+  };
+};
+bind("sCost", "vCost", "costExp", v => v.toFixed(2));
+bind("sGain", "vGain", "gainMult", v => v.toFixed(2));
+bind("sSoul", "vSoul", "soulPer", v => v.toFixed(3));
+bind("sPow", "vPow", "prestigePow", v => v.toFixed(2));
+
+setInterval(()=>{
+  const a = autoPerSec();
+  gold += a; totalGold += a;
+  histGold.push(gold); histDps.push(totalDps());
+  if(histGold.length > MAXPTS){ histGold.splice(0, histGold.length - MAXPTS); histDps.splice(0, histDps.length - MAXPTS); }
+  drawChart($("cGold"), histGold, true);
+  drawChart($("cDps"), histDps, false);
+  refresh(false);
+}, 1000);
+
+refresh(true);
+</script>
+</body>
+</html>

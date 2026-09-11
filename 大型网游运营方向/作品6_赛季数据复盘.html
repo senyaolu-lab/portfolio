@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据复盘：《边陲协议》S3 赛季复盘 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>数据复盘：《边陲协议》S3 赛季复盘</h1>
+<blockquote>运营载体：《边陲协议》（虚构）| 文档版本 v1.0 | 作者：吕森垚</blockquote>
+<blockquote>数据说明：以下数据为设计假设，用于演示复盘方法。</blockquote>
+<hr>
+<h2>1. 复盘目标</h2>
+<p>"S3 赛季是否达成'赛季活跃率 ≥60%、通行证购买率 ≥8%、赛季末 DAU 跌幅 ≤15%'三大目标？"</p>
+<h2>2. 结果对照</h2>
+<table><thead><tr><th>指标</th><th>目标</th><th>实际</th><th>达成</th></tr></thead><tbody><tr><td>赛季活跃率</td><td>≥60%</td><td>58%</td><td>略低</td></tr><tr><td>通行证购买率</td><td>≥8%</td><td>8.5%</td><td>达成</td></tr><tr><td>赛季末 DAU 跌幅</td><td>≤15%</td><td>22%</td><td>未达成 未达</td></tr><tr><td>新地图首周渗透率</td><td>≥70%</td><td>74%</td><td>达成</td></tr></tbody></table>
+<h2>3. 曲线定位（问题出在哪）</h2>
+<p>周均 DAU 指数（赛季初为 100）：W1 100 → W2 88 → W3 76 → W4 70 → W5 63 → W6 55（中期断崖，跌幅超预期）→ W7 49 → W8 78（末期冲刺反弹，但已流失的玩家没有回来）。</p>
+<p><strong>关键发现</strong>：流失集中在 <strong>W5-W6 的"中期蓄力"阶段</strong>——赛季初和赛季末都不差，<strong>问题出在中期没有足够的内容托住玩家</strong>。</p>
+<h2>4. 归因分析</h2>
+<table><thead><tr><th>现象</th><th>数据证据</th><th>根因假设</th></tr></thead><tbody><tr><td>W5-W6 断崖</td><td>DAU 从 70 跌到 55</td><td>中期只排了"周常挑战"，缺乏新内容/新活动，玩家无事可做</td></tr><tr><td>赛季末跌幅 22%</td><td>高于 15% 目标</td><td>中期流失的用户没能被末期冲刺召回</td></tr><tr><td>通行证完成率</td><td>52%（低于 60% 目标）</td><td>周常任务强度偏高，中期流失连带放弃通行证</td></tr></tbody></table>
+<h2>5. 改进方案（可验证）</h2>
+<table><thead><tr><th>改进</th><th>具体做法</th><th>验证指标</th></tr></thead><tbody><tr><td>中期加内容</td><td>W5 插一个"限时模式"（复用 S2 的经典模式换皮）</td><td>W5-W6 DAU 跌幅 ≤ 10%</td></tr><tr><td>通行证降肝</td><td>周常任务完成时间从 6 小时/周 降到 4 小时</td><td>完成率 ≥ 60%</td></tr><tr><td>中期召回</td><td>W6 对中期流失用户发"回归加速包"</td><td>中期流失率降低 5pp</td></tr></tbody></table>
+<h2>6. 一句话收获</h2>
+<blockquote>赛季运营的真正难点不是"开局"也不是"收官"，而是<strong>中期能不能持续给玩家一个上线的理由</strong>——赛季中期内容空窗 = 用通行证也锁不住人。</blockquote>
+<hr>
+<h2>附：复盘框架（复用）</h2>
+<pre><code>目标（可量化）→ 结果对照 → 曲线/漏斗定位 → 归因到设计 → 可验证改进 → 一句话收获</code></pre>
+<hr>
+<blockquote>关联：作品1（赛季结构设计，本期复盘反哺下赛季）。</blockquote>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

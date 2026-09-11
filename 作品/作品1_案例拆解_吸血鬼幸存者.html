@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案例拆解：《吸血鬼幸存者》—— 把"构筑"做进"闪避"的自动战斗 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>案例拆解：《吸血鬼幸存者》—— 把"构筑"做进"闪避"的自动战斗</h1>
+<blockquote>作品类型：深度拆解报告 | 作者：吕森垚 | 版本 v1.0 | 分析时间：约 60 小时游玩 + 社区资料</blockquote>
+<hr>
+<h2>0. 产品概览</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody><tr><td>游戏</td><td>Vampire Survivors（吸血鬼幸存者）</td></tr><tr><td>开发者</td><td>Luca Galante（单人起步，后成立 poncle）</td></tr><tr><td>类型</td><td>Roguelite / 自动战斗 / 弹幕生存</td></tr><tr><td>平台</td><td>PC / 移动 / 主机</td></tr><tr><td>单局时长</td><td>15-30 分钟</td></tr><tr><td>一句话定位</td><td><strong>玩家只控制走位，让"构筑"和"闪避"同时发生</strong></td></tr></tbody></table>
+<h2>1. 拆解目标与结论先行</h2>
+<p><strong>本次拆解要回答的问题</strong>：一款画面简陋、操作极简的游戏，凭什么成为现象级产品？</p>
+<p><strong>核心结论（我的洞察）</strong>：</p>
+<ol><li>它把传统 ARPG 的"攻击"这个最高频决策<strong>移除</strong>，让玩家的全部注意力集中到唯一剩下的决策——<strong>走位与构筑选择</strong>上，从而把"心流密度"拉满；</li><li>它的成长反馈是<strong>分钟级可见</strong>的：每 1-2 分钟 build 强度肉眼可见地翻倍，正反馈密度远超同类；</li><li>30 分钟的时间锚点 + 死亡的低挫败感（归因于"这把 build 不行"而非"我菜"），构成极强的"再来一局"钩子。</li></ol>
+<h2>2. 核心循环</h2>
+<p>移动走位闪避 → 武器自动攻击 → 击杀怪物掉落经验 → 升级三选一强化 → 凑齐武器与被动触发进化 → 强度质变、清屏爽点 → 怪物潮变强、压力上升，回到起点。</p>
+<p>死亡后进入结算，用金币解锁局外成长，变强后开启下一局。</p>
+<p>拆开看，这个循环里<strong>每一环都在 1 分钟之内完成一次</strong>，且每一环都伴随直接的正反馈（清屏、升级光柱、进化特效）。</p>
+<h2>3. 五层拆解</h2>
+<h3>3.1 玩法层：极致的"减法"</h3>
+<ul><li>砍掉：手动攻击、技能按键、闪避键、跳跃、装备栏管理；</li><li>保留：移动方向（唯一操作）+ 升级三选一（唯一决策）+ 拾取范围管理；</li><li><strong>设计意图</strong>：决策越少，每个决策的权重越大——三选一时玩家的投入感反而被放大（希克定律）。</li></ul>
+<h3>3.2 系统层：一个钩子套一个钩子</h3>
+<table><thead><tr><th>系统</th><th>作用</th><th>设计要点</th></tr></thead><tbody><tr><td>武器进化（武器+对应被动满级）</td><td>中期最强爽点</td><td>需要玩家<strong>提前规划</strong>，是构筑的核心决策</td></tr><tr><td>被动道具</td><td>数值底座</td><td>8 级上限，与武器组合有隐藏配方</td></tr><tr><td>地图事件/宝箱</td><td>节奏调剂</td><td>高风险区域的探索激励</td></tr><tr><td>局外金币解锁</td><td>长线钩子</td><td>死亡也有收益，永远不"空手而归"</td></tr></tbody></table>
+<h3>3.3 数值层：经验曲线与压力曲线</h3>
+<table><thead><tr><th>参数</th><th>我的实测/估算</th><th>作用</th></tr></thead><tbody><tr><td>升级经验需求</td><td>逐级递增，前 5 级约 2 秒/级，20 级后约 20 秒/级</td><td>前中期高频奖励，后期拉长决策间隔</td></tr><tr><td>怪物波次</td><td>每 1-5 分钟强度阶梯式上升，25 分钟起指数压力</td><td>制造"生存校验"时刻</td></tr><tr><td>武器进化门槛</td><td>武器 8 级 + 对应被动</td><td>进化前后 DPS 提升 3-8 倍，形成"质变时刻"</td></tr><tr><td>金币掉落</td><td>每局 1000-5000+，解锁项定价 100-10000</td><td>前 20 局局局有解锁，长线目标持续存在</td></tr></tbody></table>
+<blockquote>注：具体数值随版本变化，以上为拆解时的实测估算，重点是<strong>曲线形状</strong>而非精确值。</blockquote>
+<h3>3.4 体验层：30 分钟的节奏剧本</h3>
+<table><thead><tr><th>阶段</th><th>时间</th><th>玩家情绪</th><th>设计手段</th></tr></thead><tbody><tr><td>开场</td><td>0-3 分钟</td><td>轻松、熟悉</td><td>怪少、经验密、升级快</td></tr><tr><td>成长期</td><td>3-15 分钟</td><td>兴奋、期待</td><td>build 逐渐成型，每分钟变强</td></tr><tr><td>收割期</td><td>15-25 分钟</td><td>爽、掌控感</td><td>进化完成，清屏频发</td></tr><tr><td>生存期</td><td>25-30 分钟</td><td>紧张、极限</td><td>怪潮指数级，考验构筑上限</td></tr></tbody></table>
+<p><strong>死亡设计</strong>：失败不惩罚（金币照拿），且玩家会自我归因"这把 build 不够胡"→ 勾引"下把我一定更胡"。</p>
+<h3>3.5 商业层</h3>
+<ul><li>本体低价买断 + 低价 DLC 内容包，无内购抽卡；</li><li>商业逻辑：极低制作成本 + 口碑传播 + 长尾销量，验证了"小体量 Roguelite 的买断模型"。</li></ul>
+<h2>4. 它的问题与我的增量设计</h2>
+<p><strong>我识别的问题</strong>：</p>
+<ol><li>25 分钟后 build 基本固化，玩家"站桩"挂机感明显；</li><li>武器组合存在明显"最优解"，深度玩家构筑重复率高；</li><li>Boss 机制单一，中后期压力只靠堆怪量。</li></ol>
+<p><strong>增量设计（如果我来做 2.0 会加的系统）</strong>：</p>
+<ul><li><strong>诅咒系统</strong>：每局可选 1-3 个"高风险诅咒"（如"经验+50% 但怪+30% 血量"），用风险换取构筑上限，直接解决"站桩无聊"；</li><li><strong>Build 验证玩法</strong>：25 分钟固定出现"考验 Boss"，根据玩家当前伤害类型设计机制（高单体/高 AOE/高移速），倒逼构筑多样性；</li><li><strong>局间种子商店</strong>：允许锁定 1 个被动作为下局起手（轻量、不破坏 Roguelite 随机性）。</li></ul>
+<h2>5. 可迁移的三条设计原则</h2>
+<ol><li><strong>"少即是多"：减少操作维度，放大剩余决策的权重</strong>——适用于一切"操作门槛高"品类的降门槛设计；</li><li><strong>分钟级正反馈 + 明确的质变时刻</strong>：成长反馈频率决定心流密度；</li><li><strong>失败零惩罚 + 外归因</strong>：让玩家把失败归因于"构筑"而非"自己"，保护再来一局的意愿。</li></ol>
+<h2>6. 结论</h2>
+<p>《吸血鬼幸存者》的成功证明：<strong>玩法创新的本质不是"加东西"，而是"砍掉一个大家都在做的东西"</strong></p>
+<hr>
+<h2>参考来源</h2>
+<ul><li>游戏本体实测（60+ 小时）；社区 Wiki（fandom 数据）；版本更新日志。</li><li></li></ul>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

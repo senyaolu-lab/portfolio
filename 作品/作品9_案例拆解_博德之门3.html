@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案例拆解：《博德之门 3》—— 把"什么都能试"卖成大众爆款的涌现式 CRPG · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>案例拆解：《博德之门 3》—— 把"什么都能试"卖成大众爆款的涌现式 CRPG</h1>
+<blockquote>作品类型：案例拆解报告 | 作者：吕森垚 | 版本 v1.0<br>拆解对象：Larian Studios《博德之门 3》（2023 年正式版，D&amp;D 5e 规则 CRPG），本拆解基于游玩体验与公开资料。</blockquote>
+<hr>
+<h2>0. 产品概览</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody><tr><td>游戏</td><td>博德之门 3（Baldur's Gate 3）</td></tr><tr><td>开发商</td><td>Larian Studios</td></tr><tr><td>类型</td><td>CRPG / 回合制战棋 / D&amp;D 5e 规则</td></tr><tr><td>荣誉</td><td>TGA 2023 年度游戏、金摇杆年度游戏等多项大奖，销量千万级</td></tr><tr><td>一句话定位</td><td>把桌游"地下城主"的想象力，系统化成电子游戏里"什么都能试"的自由</td></tr></tbody></table>
+<h2>1. 拆解目标</h2>
+<p>CRPG 长期是小众品类，为什么博德之门 3 能成为现象级大众爆款？本次拆解回答：<strong>"涌现式自由"是如何被系统化、可视化、并让大众玩家也愿意尝试的？</strong></p>
+<h2>2. 核心循环</h2>
+<p>探索 → 遭遇（战斗 / 对话 / 技能检定）→ 资源管理（法术位与长短休）→ 剧情推进 → 等级成长 → 进入下一区域。与传统 CRPG 结构相同，差异在于<strong>每个环节都允许玩家"用设计师没想到的方式"通过</strong>。</p>
+<h2>3. 关键设计拆解</h2>
+<table><thead><tr><th>系统</th><th>设计要点</th><th>作用</th></tr></thead><tbody><tr><td>环境互动</td><td>油遇火燃烧、水导电、推箱子搭路、搬尸体触发对话</td><td>把"GM 的即兴发挥"变成可枚举的系统规则</td></tr><tr><td>骰子可视化</td><td>检定掷骰以动画呈现，成功与失败都演出</td><td>把"随机"变成"戏剧"，失败也有内容</td></tr><tr><td>起源角色与同伴</td><td>影心、盖尔等起源角色自带剧情线</td><td>同伴既是叙事载体，也是复玩钩子</td></tr><tr><td>自由解法</td><td>一个任务可用战斗、说服、潜行、变形、推人下崖等数种方式完成</td><td>涌现式玩法的来源</td></tr><tr><td>三幕结构</td><td>明确的幕间门槛与规模升级</td><td>给超长流程提供节奏锚点</td></tr></tbody></table>
+<h2>4. 我的洞察</h2>
+<ol><li><strong>"失败也是内容"是自由的另一半</strong>：检定失败有专属剧情分支，玩家不再追求"读档完美结局"，而是接受并观看失败——这大幅降低了自由玩法的"存档焦虑"，是大众玩家愿意乱试的心理前提；</li><li><strong>环境互动的本质是把 GM 的想象力"规则化"</strong>：元素反应等系统让"脑洞"变成"可预期、可学习、可传播"的玩法，玩家能在社区里交流"原来还能这样"，口碑由此裂变；</li><li><strong>同伴系统同时解决两个问题</strong>：叙事（主线之外的人物弧光）与复玩（不同同伴视角重玩）——一款 100 小时级的游戏因此拥有了数倍的重复价值。</li></ol>
+<h2>5. 问题与增量设计</h2>
+<p><strong>我识别的问题</strong>：</p>
+<ol><li>中期（第二章）节奏冗长，任务密度与主线推进失衡；</li><li>高自由度下任务追踪系统压力大，玩家"忘了要干嘛"的情况常见。</li></ol>
+<p><strong>增量设计</strong>：</p>
+<ul><li><strong>"冒险日志"叙事化</strong>：把任务追踪改写成角色日记体（当前同伴视角的一两句话），既解决记忆问题，又强化角色塑造；</li><li><strong>章节节奏锚点</strong>：在长章节中插入"营地事件轮"，用强制返回营地推进同伴剧情，将自由探索切分为可预期的小节。</li></ul>
+<h2>6. 可迁移原则</h2>
+<ol><li><strong>自由度要配上"失败也有内容"</strong>，否则玩家只会读档，自由就是负担；</li><li><strong>把创意玩法规则化、可传播化</strong>，社区传播是自由玩法最好的放大器；</li><li><strong>叙事角色与复玩价值可以合一</strong>，同伴系统是最佳载体。</li></ol>
+<h2>7. 结论</h2>
+<p>博德之门 3 证明：自由不是"没有规则"，而是"规则多到能涌现出设计师没写过的解法"。本拆解用于展示我对<strong>系统设计、涌现式玩法与叙事结构</strong>的理解。</p>
+<hr>
+<h2>参考来源</h2>
+<ul><li>游戏本体游玩体验（正式版）</li><li>TGA 2023 / 金摇杆奖官方公开信息</li><li>Larian Studios 官方访谈与开发者公开分享</li></ul>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

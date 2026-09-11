@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一页纸 GDD：《潮汐农场》 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>一页纸 GDD：《潮汐农场》</h1>
+<blockquote>作品类型：一页纸游戏概念案 | 作者：吕森垚 | 说明：展示"用一页纸把想法讲清楚"的能力。全部为原创虚构概念。</blockquote>
+<hr>
+<h2>电梯陈述（一句话）</h2>
+<p><strong>《潮汐农场》</strong>：一款"白天种田、夜晚守塔"的 Roguelite 农场游戏——你种下的作物，就是夜里防御怪潮的炮塔。</p>
+<h2>核心支柱（3 个不可妥协的设计）</h2>
+<ol><li><strong>种什么 = 守什么</strong>：作物同时是经济产出与防御单位，玩家的每一次播种都是双重决策；</li><li><strong>潮汐节奏</strong>：7 天一周期（白天 5 分钟 / 夜晚 3 分钟），失败不删档，只损失"本轮收成"，永远有再来一次的钩子；</li><li><strong>组合农场</strong>：不同作物组合产生效果（南瓜+向日葵=阳光炮台），鼓励"布局构筑"而非数值堆砌。</li></ol>
+<h2>核心循环</h2>
+<p>白天种植与布局，夜晚作物自动迎战怪潮，结算收成与解锁，随后进入下一周期（新种子、新怪、新组合），如此循环。</p>
+<h2>差异化（为什么现在做能成）</h2>
+<ul><li>模拟经营（星露谷式）与塔防（植物大战僵尸式）的<strong>交叉品类</strong>尚处蓝海，两边的用户都能被"我种的田会打架"一句话吸引；</li><li>周期制（7 天一小循环）天然适配移动端碎片时间与"睡前收一波菜"的每日登录场景。</li></ul>
+<h2>目标平台与规模</h2>
+<p>移动端竖屏优先 / 首发单机买断 + DLC 种子包 / 6 人团队 12 个月 MVP（复用已验证的种植与塔防框架）。</p>
+<h2>对标与参考</h2>
+<p>《星露谷物语》（经营情感）×《植物大战僵尸》（塔防直觉）×《吸血鬼幸存者》（轻操作与成长爽感）。</p>
+<h2>核心 KPI 假设（上线后验证）</h2>
+<ul><li>次日留存 ≥ 55%（锚点：睡前收菜 + 周期结算）；</li><li>平均单局周期 15 分钟，人均每日 1.2 局；</li><li>第 7 天周期完成率 ≥ 70%。</li></ul>
+<h2>明确不做（边界）</h2>
+<p>不做：PVP、大地图开放世界、剧情主线（仅世界观碎片）；多人联机为 2.0 规划。</p>
+<hr>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

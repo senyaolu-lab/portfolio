@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据复盘：《星野物语》开服七日签到活动复盘 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>数据复盘：《星野物语》开服七日签到活动复盘</h1>
+<blockquote>运营载体：《星野物语》（虚构）| 文档版本 v1.0 | 作者：吕森垚</blockquote>
+<blockquote>数据说明：以下数据为设计假设，用于演示复盘方法。</blockquote>
+<hr>
+<h2>1. 复盘目标（先明确这次复盘要回答什么）</h2>
+<p>"七日签到活动是否达成拉留存目标？哪些环节值得优化？"</p>
+<h2>2. 结果对照（目标 vs 实际）</h2>
+<table><thead><tr><th>指标</th><th>目标值</th><th>实际值</th><th>达成</th></tr></thead><tbody><tr><td>7 日签到完成率</td><td>≥70%</td><td>64%</td><td>未达成</td></tr><tr><td>次日留存</td><td>45%</td><td>46%</td><td>达成</td></tr><tr><td>7 日留存</td><td>20%</td><td>18%</td><td>未达</td></tr><tr><td>Day7 领取后 24h 付费率</td><td>4%</td><td>3.6%</td><td>略低</td></tr></tbody></table>
+<h2>3. 漏斗分析（定位问题在哪个环节）</h2>
+<p>开服注册 100% → Day1 签到 88% → Day2 签到 78% → Day3 签到 71%（首日到 Day3 流失 29%，主要断层）→ Day5 签到 66% → Day7 完成 64%。</p>
+<p><strong>关键发现</strong>：流失集中在 <strong>Day2→Day3</strong>（-11pp），而非最后几天。说明问题不在"大奖吸引力"，而在<strong>前期目标感不足</strong>。</p>
+<h2>4. 归因分析（数据 → 原因 → 设计缺陷）</h2>
+<table><thead><tr><th>现象</th><th>数据证据</th><th>根因假设</th></tr></thead><tbody><tr><td>Day2→Day3 断层</td><td>Day2 78% → Day3 71%</td><td>Day3 奖励是"SSR 碎片×10"，但<strong>碎片无法即时使用</strong>（需 30 片合成），玩家看不到"今天签到的价值"</td></tr><tr><td>7 留未达</td><td>18% vs 20%</td><td>签到给的体力/材料偏养成，但<strong>未绑定明确的每日目标</strong>（如"今天推哪关"）</td></tr><tr><td>付费钩子偏弱</td><td>3.6% vs 4%</td><td>Day7 自选券后"差一步成型"，但首充礼包入口不够醒目</td></tr></tbody></table>
+<h2>5. 改进方案（可验证的改动）</h2>
+<table><thead><tr><th>改进</th><th>具体做法</th><th>验证指标</th></tr></thead><tbody><tr><td>Day3 即时价值</td><td>碎片改发"可直接上阵的 SR 整卡 + 少量 SSR 碎片"</td><td>Day3 签到率 ≥ 75%</td></tr><tr><td>每日目标绑定</td><td>签到奖励附带"今日任务"，完成后额外奖励</td><td>7 日留存 ≥ 20%</td></tr><tr><td>付费入口前置</td><td>Day5 就弹首充礼包引导（而非 Day7 后），Day7 强化领取</td><td>Day7 后付费率 ≥ 4%</td></tr></tbody></table>
+<h2>6. 一句话收获</h2>
+<blockquote>留存活动的问题往往不在"最终大奖"，而在<strong>玩家能否在每一天都看到"今天签到的即时价值"</strong>——即时反馈 &gt; 远期锚点。</blockquote>
+<hr>
+<h2>附：复盘报告通用框架</h2>
+<pre><code>1. 目标（可量化） → 2. 结果对照 → 3. 漏斗/差异定位 → 4. 归因到设计 → 5. 可验证改进 → 6. 一句话收获</code></pre>
+<hr>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

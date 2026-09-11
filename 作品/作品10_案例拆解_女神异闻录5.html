@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案例拆解：《女神异闻录 5》—— 日历系统与风格化 UI 的双重设计资产 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:880px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:880px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:28px;font-weight:800;letter-spacing:.5px;margin:0 0 8px;line-height:1.4;}
+h2{font-size:19.5px;font-weight:700;margin:44px 0 15px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h3{font-size:16px;font-weight:700;margin:28px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:13.5px;line-height:1.7;}
+pre code{background:none;border:none;padding:0;color:#cfd0dd;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+<h1>案例拆解：《女神异闻录 5》—— 日历系统与风格化 UI 的双重设计资产</h1>
+<blockquote>作品类型：案例拆解报告 | 作者：吕森垚 | 版本 v1.0<br>拆解对象：Atlus《女神异闻录 5》（Persona 5，含皇家版），本拆解基于游玩体验与公开资料。</blockquote>
+<hr>
+<h2>0. 产品概览</h2>
+<table><thead><tr><th>项</th><th>内容</th></tr></thead><tbody><tr><td>游戏</td><td>女神异闻录 5（Persona 5）</td></tr><tr><td>开发商</td><td>Atlus</td></tr><tr><td>类型</td><td>JRPG / 校园日常 + 异世界冒险</td></tr><tr><td>系列销量</td><td>系列累计千万级（公开资料）</td></tr><tr><td>一句话定位</td><td>用"日历"把校园日常与迷宫冒险缝合成一款时间管理游戏</td></tr></tbody></table>
+<h2>1. 拆解目标</h2>
+<p>P5 最独特的是"日历系统"与"风格化 UI"。本次拆解回答：<strong>日常与冒险两种完全不同的玩法，如何靠"时间"这个资源合为一体？风格化 UI 又如何从视觉选择升级为品牌资产？</strong></p>
+<h2>2. 核心循环</h2>
+<p>白天行动（上课 / 打工 / 培养协力者）→ 放学与夜晚行动 → 进入异世界宫殿限时攻略 → 剧情事件 → 日期推进。每一天都是有限的"行动点"分配题，现实日历同时是倒计时与养成节奏器。</p>
+<h2>3. 关键系统拆解</h2>
+<table><thead><tr><th>系统</th><th>设计要点</th><th>作用</th></tr></thead><tbody><tr><td>日历与行动点</td><td>每日上下午各若干行动机会，日期推进触发剧情</td><td>把"时间"变成核心资源，日常与冒险互相争夺</td></tr><tr><td>宫殿与预告信</td><td>盗窃目标限时完成，发出预告信后进入倒计时</td><td>给自由日常一个硬性目标锚点</td></tr><tr><td>协力者（Coop）</td><td>社交链接：日常剧情 + 战斗增益 + 新人格面具解锁</td><td>社交系统与战斗系统互相强化，而非并行</td></tr><tr><td>弱点与 1 More</td><td>击破弱点追加行动，全倒触发总攻击</td><td>回合制战斗的节奏放大器</td></tr><tr><td>风格化 UI</td><td>红黑撞色、斜切排版、动态菜单</td><td>重复操作被视觉包装，UI 本身成为记忆点</td></tr></tbody></table>
+<h2>4. 我的洞察</h2>
+<ol><li><strong>"日常"与"冒险"互为对方的目的</strong>：日常养成让战斗更强，战斗推进解锁更多日常内容——两者不是两个玩法，而是一个循环的两半，玩家对"明天"永远有期待；</li><li><strong>协力者系统是 JRPG 社交设计的答案</strong>：把"好感度"从数值变成有剧情、有战斗收益、有收集价值的三重钩子；</li><li><strong>UI 是 JRPG 被低估的品牌资产</strong>：当同类游戏的菜单千篇一律时，P5 的风格化 UI 让"打开菜单"这个高频动作本身成为品牌记忆——视觉风格参与留存。</li></ol>
+<h2>5. 问题与增量设计</h2>
+<p><strong>我识别的问题</strong>：</p>
+<ol><li>宫殿攻略的迷宫结构后期重复感明显；</li><li>日历系统的"最优解"一旦被攻略化，自由选择退化为抄作业。</li></ol>
+<p><strong>增量设计</strong>：</p>
+<ul><li><strong>宫殿动态房间</strong>：每周目随机化宫殿的部分房间结构与宝箱位置，让"最优解"失效，恢复探索感；</li><li><strong>日程扰动事件</strong>：在日历中随机插入"临时事件"（如突然的考试、同伴求助），打破固定日程表，让时间管理保持紧张。</li></ul>
+<h2>6. 可迁移原则</h2>
+<ol><li><strong>用"时间"统一两种玩法</strong>：把现实时间做成资源，日常与冒险就不再割裂；</li><li><strong>社交系统要为战斗服务</strong>，否则只是双倍的打工；</li><li><strong>高频操作值得最高成本的视觉投入</strong>：UI 风格化是最便宜的留存手段之一。</li></ol>
+<h2>7. 结论</h2>
+<p>P5 证明：JRPG 的差异化不一定要靠新战斗系统，把"日常"做成玩法、把"菜单"做成品牌，同样能成就一代名作。本拆解用于展示我对<strong>系统循环、时间管理与视觉设计参与留存</strong>的理解。</p>
+<hr>
+<h2>参考来源</h2>
+<ul><li>游戏本体游玩体验（P5 / P5R）</li><li>Atlus 官方公开销售数据与访谈</li><li>系列作品的公开媒体资料</li></ul>
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+</body>
+</html>

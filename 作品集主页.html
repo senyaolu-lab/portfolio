@@ -72,6 +72,20 @@ section{padding:86px 0;}
 .chip{border:1px solid var(--line);border-radius:999px;padding:9px 20px;font-size:13.5px;color:var(--dim);background:var(--bg2);letter-spacing:1px;}
 .chip b{color:var(--gold);font-weight:600;}
 
+/* 游玩历程 */
+.intro{max-width:800px;margin:0 auto 40px;text-align:center;font-size:14.5px;color:#b9bacb;line-height:2;}
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media(max-width:920px){.games{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:620px){.games{grid-template-columns:1fr;}}
+.gcat{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--bg2);transition:.22s;}
+.gcat:hover{border-color:var(--gold-soft);}
+.gcat h4{font-size:14.5px;font-weight:700;letter-spacing:.5px;margin-bottom:3px;}
+.gcat .cnt{font-size:11.5px;color:var(--dim);letter-spacing:1px;margin-bottom:12px;}
+.gtags{display:flex;flex-wrap:wrap;gap:7px;}
+.gtag{font-size:12px;color:#c3c4d4;border:1px solid var(--line);border-radius:6px;padding:4px 10px;background:rgba(255,255,255,.015);}
+.gtag.hl{color:var(--gold);border-color:var(--gold-soft);background:rgba(223,165,90,.06);}
+.legend{text-align:center;font-size:12.5px;color:var(--dim);margin-top:24px;}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--gold);margin-right:7px;vertical-align:middle;}
 /* 作品（分类彩色编码） */
 .cat{margin-bottom:64px;--c:#dfa55a;}
 .cat:last-child{margin-bottom:0;}
@@ -113,6 +127,7 @@ footer .note{margin-top:14px;opacity:.65;}
   <div class="wrap">
     <div class="brand">吕森垚 <b>·</b> 作品集</div>
     <div class="links">
+      <a href="#games">阅历</a>
       <a href="#about">关于</a>
       <a href="#skills">能力</a>
       <a href="#works">作品</a>
@@ -146,9 +161,89 @@ footer .note{margin-top:14px;opacity:.65;}
   </div>
 </section>
 
+<section id="games">
+  <div class="wrap">
+    <div class="sec-head"><div class="no">01</div><h2>游玩历程</h2><div class="sub">GAME PLAY HISTORY · SINCE 2012</div></div>
+    <p class="intro">2012 年接触电子游戏，从小观看 GTV 游戏竞技与游戏风云长大。以下为凭回忆整理的游玩目录，按品类归集（仅凭回忆，100+ 款）。</p>
+    <div class="games">
+      <div class="gcat">
+        <h4>MOBA 竞技</h4>
+        <div class="cnt">6 款</div>
+        <div class="gtags"><span class="gtag">英雄联盟</span><span class="gtag">王者荣耀</span><span class="gtag hl">Dota 2</span><span class="gtag">决战！平安京</span><span class="gtag">300英雄</span><span class="gtag">非人学园</span></div>
+      </div>
+      <div class="gcat">
+        <h4>射击 · 战术竞技</h4>
+        <div class="cnt">14 款</div>
+        <div class="gtags"><span class="gtag hl">CS:GO</span><span class="gtag hl">三角洲行动</span><span class="gtag">守望先锋</span><span class="gtag">THE FINALS</span><span class="gtag">猎杀对决</span><span class="gtag">战地 1 / 2042 / 6</span><span class="gtag">使命召唤：现代战争三部曲（最高难度通关）</span><span class="gtag">使命召唤 OL</span><span class="gtag">使命召唤大战场</span><span class="gtag">逆战</span><span class="gtag">枪神纪</span><span class="gtag">幽灵行动</span><span class="gtag">Apex 英雄</span><span class="gtag hl">Deadlock</span></div>
+      </div>
+      <div class="gcat">
+        <h4>大逃杀 · 刷宝射击</h4>
+        <div class="cnt">6 款</div>
+        <div class="gtags"><span class="gtag">PUBG</span><span class="gtag">刺激战场</span><span class="gtag">堡垒之夜</span><span class="gtag">命运 2</span><span class="gtag">星际战甲（Warframe）</span><span class="gtag">求生之路 1·2</span></div>
+      </div>
+      <div class="gcat">
+        <h4>RTS 即时战略</h4>
+        <div class="cnt">3 款</div>
+        <div class="gtags"><span class="gtag">魔兽争霸 3：冰封王座</span><span class="gtag">星际争霸 2</span><span class="gtag">红色警戒 2：共和国之辉</span></div>
+      </div>
+      <div class="gcat">
+        <h4>竞速</h4>
+        <div class="cnt">4 款</div>
+        <div class="gtags"><span class="gtag">极品飞车</span><span class="gtag">QQ 飞车</span><span class="gtag">跑跑卡丁车</span><span class="gtag">狂野飙车</span></div>
+      </div>
+      <div class="gcat">
+        <h4>策略 · 塔防 · 自走棋</h4>
+        <div class="cnt">5 款</div>
+        <div class="gtags"><span class="gtag">文明 6</span><span class="gtag">植物大战僵尸</span><span class="gtag">王国保卫战 1-5</span><span class="gtag">皇室战争</span><span class="gtag">金铲铲之战</span></div>
+      </div>
+      <div class="gcat">
+        <h4>卡牌 · 集换式</h4>
+        <div class="cnt">2 款</div>
+        <div class="gtags"><span class="gtag">游戏王（实体卡 / 决斗链接 / Master Duel）</span><span class="gtag">炉石传说</span></div>
+      </div>
+      <div class="gcat">
+        <h4>二次元 · 养成</h4>
+        <div class="cnt">6 款</div>
+        <div class="gtags"><span class="gtag">公主连结</span><span class="gtag">阴阳师</span><span class="gtag">重返未来：1999</span><span class="gtag">永远的 7 日之都</span><span class="gtag">最强蜗牛</span><span class="gtag">魔女之泉系列</span></div>
+      </div>
+      <div class="gcat">
+        <h4>动作 · ACT / ARPG / 平台跳跃</h4>
+        <div class="cnt">12 款</div>
+        <div class="gtags"><span class="gtag hl">崩坏 3</span><span class="gtag">战双帕弥什</span><span class="gtag">尼尔：机械纪元</span><span class="gtag">只狼</span><span class="gtag">艾希</span><span class="gtag">空洞骑士</span><span class="gtag">奥日与黑暗森林 / 萤火之森</span><span class="gtag">蔚蓝（Celeste）</span><span class="gtag">讨鬼传</span><span class="gtag">真·三国无双</span><span class="gtag">忍者必须死</span><span class="gtag">海姆达尔</span></div>
+      </div>
+      <div class="gcat">
+        <h4>开放世界 · 生存沙盒</h4>
+        <div class="cnt">9 款</div>
+        <div class="gtags"><span class="gtag">原神</span><span class="gtag">侠盗猎车手（GTA）</span><span class="gtag">我的世界</span><span class="gtag">饥荒</span><span class="gtag">方舟：生存进化</span><span class="gtag">未转变者</span><span class="gtag">幻兽帕鲁</span><span class="gtag">传送门骑士</span><span class="gtag">星露谷物语</span></div>
+      </div>
+      <div class="gcat">
+        <h4>CRPG · JRPG · 叙事</h4>
+        <div class="cnt">6 款</div>
+        <div class="gtags"><span class="gtag hl">博德之门 3</span><span class="gtag hl">女神异闻录 5 皇家版（P5R）</span><span class="gtag">宝可梦系列</span><span class="gtag">最终幻想（重制版）</span><span class="gtag">去月球</span><span class="gtag">Galgame</span></div>
+      </div>
+      <div class="gcat">
+        <h4>恐怖 · 非对称 · 解谜</h4>
+        <div class="cnt">9 款</div>
+        <div class="gtags"><span class="gtag">第五人格</span><span class="gtag">黎明杀机</span><span class="gtag">后室</span><span class="gtag">黑暗欺诈</span><span class="gtag">SCP：秘密实验室</span><span class="gtag">R.E.P.O.</span><span class="gtag">纪念碑谷</span><span class="gtag">达芬奇密室</span><span class="gtag">纸嫁衣系列</span></div>
+      </div>
+      <div class="gcat">
+        <h4>派对 · 音游 · 休闲</h4>
+        <div class="cnt">13 款</div>
+        <div class="gtags"><span class="gtag">蛋仔派对</span><span class="gtag">胡闹厨房</span><span class="gtag">狼人杀</span><span class="gtag">鹅鸭杀</span><span class="gtag">QQ 小游戏</span><span class="gtag">Deemo（古树旋律）</span><span class="gtag">OSU!</span><span class="gtag">Phigros</span><span class="gtag">BanG Dream（邦邦）</span><span class="gtag">QQ 炫舞</span><span class="gtag">地铁跑酷</span><span class="gtag">天天酷跑</span><span class="gtag">滚动的天空</span></div>
+      </div>
+      <div class="gcat">
+        <h4>MMORPG · 格斗 · 页游</h4>
+        <div class="cnt">6 款</div>
+        <div class="gtags"><span class="gtag">剑灵</span><span class="gtag">龙之谷</span><span class="gtag">真人快打 11</span><span class="gtag">火影忍者</span><span class="gtag">4399 页游（数量丰富）</span><span class="gtag">7K7K 页游</span></div>
+      </div>
+    </div>
+    <p class="legend"><i></i>金色标记为我在本作品集中做过拆解或分析的产品</p>
+  </div>
+</section>
+
 <section id="about">
   <div class="wrap">
-    <div class="sec-head"><div class="no">01</div><h2>关于我</h2><div class="sub">ABOUT</div></div>
+    <div class="sec-head"><div class="no">02</div><h2>关于我</h2><div class="sub">ABOUT</div></div>
     <div class="about-grid">
       <div class="acard">
         <div class="no">01</div>
@@ -176,7 +271,7 @@ footer .note{margin-top:14px;opacity:.65;}
 
 <section id="skills">
   <div class="wrap">
-    <div class="sec-head"><div class="no">02</div><h2>能力关键词</h2><div class="sub">SKILLS</div></div>
+    <div class="sec-head"><div class="no">03</div><h2>能力关键词</h2><div class="sub">SKILLS</div></div>
     <div class="skills">
       <span class="chip"><b>AI Agent</b> 工作流</span>
       <span class="chip"><b>自然语言</b>数据分析</span>
@@ -196,7 +291,7 @@ footer .note{margin-top:14px;opacity:.65;}
 
 <section id="works">
   <div class="wrap">
-    <div class="sec-head"><div class="no">03</div><h2>作品精选</h2><div class="sub">SELECTED WORKS</div></div>
+    <div class="sec-head"><div class="no">04</div><h2>作品精选</h2><div class="sub">SELECTED WORKS</div></div>
 
     <div class="cat" style="--c:#dfa55a;">
       <div class="cat-head"><span class="cat-no">A</span><h3>AI Agent 应用</h3><span class="cat-desc">1 份 · 运营提效 · 差异化方向</span></div>
@@ -436,7 +531,7 @@ footer .note{margin-top:14px;opacity:.65;}
 
 <section id="protos">
   <div class="wrap">
-    <div class="sec-head"><div class="no">04</div><h2>可玩原型</h2><div class="sub">PLAYABLE PROTOTYPES</div></div>
+    <div class="sec-head"><div class="no">05</div><h2>可玩原型</h2><div class="sub">PLAYABLE PROTOTYPES</div></div>
 
     <div class="proto">
       <div class="phead">

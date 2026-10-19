@@ -451,6 +451,50 @@ body[data-case='studio'][data-phase='dawn'] .phase-tint {
 .feed-empty p { margin: 0 0 6px; }
 .feed-empty .dim { font-size: 12px; color: var(--muted); font-family: var(--sans); }
 
+/* 开局卡：第一次进对局时告诉你下一步 */
+.feed-open {
+  border: 1px solid rgba(215, 160, 95, 0.28);
+  border-radius: 4px;
+  padding: 18px 20px 16px;
+  background: linear-gradient(180deg, rgba(215, 160, 95, 0.09), rgba(215, 160, 95, 0.02));
+  max-width: 620px;
+  animation: rise 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.fo-k {
+  font-size: 9.5px; letter-spacing: 0.4em; color: var(--amber);
+  margin-bottom: 10px; text-transform: uppercase;
+}
+.fo-lead {
+  font-family: var(--serif); font-size: 14px; line-height: 1.95;
+  color: var(--paper-dim); margin: 0 0 12px;
+}
+.fo-lead b, .fo-steps b { color: var(--paper); font-weight: 600; }
+.fo-steps {
+  margin: 0 0 16px; padding-left: 20px;
+  font-size: 12px; line-height: 1.9; color: var(--muted);
+}
+.fo-steps li { margin: 4px 0; }
+.fo-steps li::marker { color: var(--amber); }
+.feed-open .btn { font-size: 12.5px; padding: 9px 20px; }
+
+/* 空状态卡片（证据板 / 笔记） */
+.empty-card {
+  border: 1px dashed var(--line);
+  border-radius: 3px;
+  padding: 12px 13px;
+  background: rgba(255, 255, 255, 0.012);
+}
+.ec-t {
+  font-family: var(--serif); font-size: 12.5px; color: var(--paper-dim);
+  letter-spacing: 0.06em; margin-bottom: 7px;
+}
+.empty-card p {
+  margin: 0 0 6px; font-size: 10.5px; line-height: 1.75; color: var(--muted);
+}
+.empty-card p:last-child { margin-bottom: 0; }
+.empty-card b { color: var(--amber); font-weight: 500; }
+.ec-dim { opacity: 0.72; }
+
 /* 犯人的话贴在底部，像真的坐在对面 */
 .feed > .msg:first-child { margin-top: auto; }
 .msg { display: flex; flex-direction: column; max-width: 84%; animation: rise 0.32s cubic-bezier(0.2, 0.7, 0.3, 1); }
@@ -3622,16 +3666,42 @@ function renderFeed() {
   const list = g.state.transcripts[app.active] || [];
   const feed = $('feed');
   feed.innerHTML = '';
+  // 还没搜过任何地方 = 一局刚开始，先给一张"从这里开始"的卡，别让玩家对着空白发呆
+  const opening = g.state.searched.length === 0 && !g.state.result;
+  if (opening) feed.appendChild(openingCard(g));
   if (!list.length) {
-    feed.innerHTML = `<div class="feed-empty">
-      <p>门关上了。</p>
+    const empty = document.createElement('div');
+    empty.className = 'feed-empty';
+    empty.innerHTML = `<p>门关上了。</p>
       <p class="dim">${esc(E.suspectOf(g, app.active).name)}坐下来，没有先开口。</p>
-      <p class="dim">问点什么。任何事都可以问——但时间在走。</p>
-    </div>`;
-    return;
+      <p class="dim">问点什么。任何事都可以问——但时间在走。</p>`;
+    feed.appendChild(empty);
+  } else {
+    for (const m of list) feed.appendChild(msgEl(m, false));
   }
-  for (const m of list) feed.appendChild(msgEl(m, false));
   feed.scrollTop = feed.scrollHeight;
+  if (opening) {
+    const btn = $('fo-start');
+    if (btn) btn.onclick = () => doSearch(g.case.locations[0].id);
+  }
+}
+
+// 开局卡：告诉你现在在哪、还剩多久、下一步点哪
+function openingCard(g) {
+  const scene = g.case.locations[0];
+  const v = g.case.victim;
+  const box = document.createElement('div');
+  box.className = 'feed-open';
+  box.innerHTML = `<div class="fo-k">从这里开始</div>
+    <p class="fo-lead">${esc(v.name)}死在<b>${esc(v.foundAt)}</b>，尸体是 ${esc(v.foundTime)} 被发现的。
+    你手上还有 <b>${g.state.timeLeft} 小时</b>，而屋里这 ${g.case.suspects.length} 个人，全都在撒谎。</p>
+    <ol class="fo-steps">
+      <li>先搜<b>${esc(scene.name)}</b>——凶器、精确的死亡时间、只属于凶手的现场痕迹，都在那儿。</li>
+      <li>把搜到的东西推给那个人看：<b>证据板</b>点开卡片，就能出示。</li>
+      <li>防线掉到 0，他会自己把话说完。</li>
+    </ol>
+    <button class="btn primary" id="fo-start">搜查「${esc(scene.name)}」 · ${scene.cost}h</button>`;
+  return box;
 }
 
 function msgEl(m, typing) {
@@ -3709,7 +3779,12 @@ function renderEvidence() {
   const found = g.state.found;
   $('clue-count').textContent = found.length;
   if (!found.length) {
-    $('evidence').innerHTML = `<li class="empty-note">还没有物证。先去一个地方搜。</li>`;
+    const scene = g.case.locations[0];
+    $('evidence').innerHTML = `<li class="empty-card">
+      <div class="ec-t">证据板还是空的</div>
+      <p>物证要靠<b>搜查</b>换来。去左边点「${esc(scene.name)}」——第一个地点永远有凶器、死亡时间和凶手的痕迹。</p>
+      <p class="ec-dim">搜到之后，每一件都会出现在这里；点卡片能看完整描述，也能直接出示。</p>
+    </li>`;
     return;
   }
   $('evidence').innerHTML = found
@@ -3738,7 +3813,10 @@ function renderNotes() {
   const g = app.game;
   const notes = g.state.notes.slice(-9).reverse();
   if (!notes.length) {
-    $('notes').innerHTML = `<li class="empty-note">笔记还是空的。</li>`;
+    $('notes').innerHTML = `<li class="empty-card">
+      <div class="ec-t">还没有笔记</div>
+      <p>你问出来的矛盾、他松口时漏出的地名、法医的结论，都会自动记在这里。</p>
+    </li>`;
     return;
   }
   $('notes').innerHTML = notes

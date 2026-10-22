@@ -14,7 +14,16 @@
 
 > 改了内容之后要重新生成：`node _学习资料_非作品集/_build_render.js`（所有 html 页）、
 > `node _学习资料_非作品集/_build_print.js` + 浏览器打印（PDF）、
-> `node ../fog-witness/tools/build-single.mjs --portfolio`（游戏单文件）。
+> `node ../fog-witness/tools/build-single.mjs --portfolio`（游戏单文件）、
+> `node ../fog-witness/tools/record-demo.mjs`（30 秒演示视频，需要本地服务在跑）。
+
+## 《雾港档案》的三个入口
+
+| 文件 | 是什么 | 给谁看 |
+| --- | --- | --- |
+| `作品/作品15_案例研究_雾港档案.html` | **案例研究**：问题→设计→取舍→验证→迭代→反思，含 30 秒实录 | 面试官先看这个 |
+| `雾港档案/雾港档案.html` | 可玩单文件（双击即玩） | 想亲手玩的人 |
+| `作品/作品14_游戏设计文档_雾港档案.html` | 设计文档：完整规则、数值、剧本创作规范 | 想抄作业的人 |
 
 ---
 

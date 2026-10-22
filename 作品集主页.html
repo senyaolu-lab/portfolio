@@ -144,6 +144,7 @@ iframe{width:100%;height:560px;border:1px solid var(--line);border-radius:12px;b
 .gf-cta .btn{padding:11px 26px;font-size:13.5px;}
 .gf-meta{margin-top:16px;font-size:11.5px;color:var(--dim);letter-spacing:1px;opacity:.75;}
 .gf-shot img{width:100%;border-radius:12px;border:1px solid var(--line);display:block;}
+.gf-shot video{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#000;}
 .gf-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
 .gf-cap{margin-top:10px;font-size:11.5px;color:var(--dim);text-align:center;letter-spacing:.5px;}
 
@@ -317,13 +318,14 @@ footer .note{margin-top:14px;opacity:.65;}
           <li><strong>零依赖零素材</strong>：一个 HTML 文件即可游玩，界面全部由 CSS 绘制，雨声与音效由 WebAudio 现场合成。</li>
         </ul>
         <div class="gf-cta">
-          <a class="btn gold" href="雾港档案/雾港档案.html" target="_blank">立即试玩 ↗</a>
-          <a class="btn ghost" href="作品/作品14_游戏设计文档_雾港档案.html" target="_blank">游戏设计文档</a>
+          <a class="btn gold" href="作品/作品15_案例研究_雾港档案.html" target="_blank">案例研究（推荐先看）</a>
+          <a class="btn ghost" href="雾港档案/雾港档案.html" target="_blank">立即试玩 ↗</a>
+          <a class="btn ghost" href="作品/作品14_游戏设计文档_雾港档案.html" target="_blank">设计文档</a>
         </div>
         <div class="gf-meta">2 案 · 4 嫌疑人 · 12 条线索 · 4 种手法 · 5 个地点 · 离线可玩</div>
       </div>
       <div class="gf-shot">
-        <img src="雾港档案/shots/studio.png" alt="《雾港档案》审讯界面" />
+        <video src="雾港档案/demo/fog-demo.mp4" poster="雾港档案/shots/studio.png" autoplay muted loop playsinline controls></video>
         <div class="gf-thumbs">
           <img src="雾港档案/shots/theater.png" alt="第一案：圣马可剧院" />
           <img src="雾港档案/shots/verdict.png" alt="结案报告" />
@@ -621,10 +623,16 @@ footer .note{margin-top:14px;opacity:.65;}
     </div>
 
     <div class="cat" style="--c:#9d8cff;">
-      <div class="cat-head"><span class="cat-no">I</span><h3>AI 原生游戏</h3><span class="cat-desc">1 份 · 可玩作品的设计文档</span></div>
+      <div class="cat-head"><span class="cat-no">I</span><h3>AI 原生游戏</h3><span class="cat-desc">2 份 · 案例研究 + 设计文档</span></div>
       <div class="cards">
+        <a class="card" href="作品/作品15_案例研究_雾港档案.html" target="_blank">
+          <div class="top"><span class="tag">案例研究</span><span class="idx">32</span></div>
+          <h4>《雾港档案》案例研究</h4>
+          <p>把"审讯"做成资源管理问题：时间预算、信息层级、关键取舍与 240 局可解性验证，含 30 秒实录。</p>
+          <span class="goto">阅读全文 →</span>
+        </a>
         <a class="card" href="作品/作品14_游戏设计文档_雾港档案.html" target="_blank">
-          <div class="top"><span class="tag">设计文档</span><span class="idx">32</span></div>
+          <div class="top"><span class="tag">设计文档</span><span class="idx">33</span></div>
           <h4>《雾港档案》游戏设计文档</h4>
           <p>两案的核心循环、数值演算、密室三层设计与剧本创作规范：把真相交给代码，把语气交给模型。</p>
           <span class="goto">阅读全文 →</span>

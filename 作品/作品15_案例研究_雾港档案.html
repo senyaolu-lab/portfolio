@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案例研究：《雾港档案》—— 把"审讯"做成资源管理问题 · 吕森垚作品集</title>
+<style>
+:root{--bg:#0e0e15;--text:#e2e3ec;--dim:#8f91a6;--line:#262633;--panel:#14141d;--accent:#dfa55a;--blue:#6ba7ff;--green:#7fd0a8;--red:#c4635a;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(14,14,21,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:900px;margin:0 auto;padding:13px 28px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim);}
+.topbar a{color:var(--dim);text-decoration:none;}
+.topbar a:hover{color:var(--accent);}
+.topbar .brand{color:var(--text);font-weight:700;letter-spacing:.5px;}
+main{max-width:900px;margin:0 auto;padding:44px 28px 110px;}
+h1{font-size:29px;font-weight:800;letter-spacing:.5px;margin:0 0 10px;line-height:1.45;}
+h2{font-size:20px;font-weight:700;margin:52px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--line);line-height:1.4;}
+h2 .idx{color:var(--accent);font-size:13px;letter-spacing:2px;margin-right:10px;vertical-align:2px;}
+h3{font-size:16px;font-weight:700;margin:30px 0 10px;}
+h4{font-size:15px;font-weight:700;margin:20px 0 8px;color:#c3c4d4;}
+p{margin:12px 0;}
+blockquote{margin:16px 0;padding:12px 20px;border-left:2px solid var(--accent);background:var(--panel);color:var(--dim);border-radius:0 10px 10px 0;font-size:14px;}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;}
+th,td{border:1px solid var(--line);padding:9px 13px;text-align:left;vertical-align:top;}
+th{background:var(--panel);color:#d3d4e2;font-weight:600;white-space:nowrap;}
+tr:nth-child(even) td{background:rgba(255,255,255,.018);}
+td.num{font-family:Consolas,monospace;color:var(--accent);white-space:nowrap;}
+ul,ol{margin:12px 0;padding-left:26px;}
+li{margin:7px 0;}
+li::marker{color:var(--accent);}
+code{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1.5px 7px;font-size:13px;font-family:Consolas,"Courier New",monospace;color:#d8b47c;}
+a{color:var(--blue);}
+hr{border:none;border-top:1px solid var(--line);margin:40px 0;}
+.foot{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:12.5px;}
+
+/* 头部 */
+.cs-hero{background:linear-gradient(165deg,rgba(223,165,90,.07),rgba(20,20,29,.6));border:1px solid var(--line);border-radius:18px;padding:30px 32px;margin-bottom:34px;}
+.cs-kicker{font-size:11px;letter-spacing:3px;color:var(--accent);margin-bottom:14px;}
+.cs-hero h1{margin-bottom:12px;}
+.cs-lead{font-size:15.5px;color:#c9cadb;line-height:2;margin:0 0 22px;}
+.cs-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+.cs-stats div{background:var(--panel);padding:14px 6px;text-align:center;}
+.cs-stats b{display:block;font-size:22px;color:var(--accent);font-family:var(--serif),serif;line-height:1.2;}
+.cs-stats span{font-size:10.5px;color:var(--dim);letter-spacing:1px;}
+@media(max-width:680px){.cs-stats{grid-template-columns:repeat(3,1fr);}}
+
+/* 视频 */
+.cs-video{margin:26px 0 8px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0a0b0d;}
+.cs-video video{width:100%;display:block;}
+.cs-cap{font-size:11.5px;color:var(--dim);margin-top:8px;text-align:center;}
+
+/* 流程 */
+.cs-flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 6px;}
+.cs-flow span{border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:12.5px;color:#c9cadb;background:var(--panel);}
+.cs-flow span.hot{border-color:rgba(223,165,90,.5);color:var(--accent);}
+.cs-flow i{color:var(--accent);opacity:.6;font-style:normal;}
+
+/* 预算条 */
+.budget{margin:20px 0 8px;}
+.budget .bar{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line);}
+.budget .bar div{display:flex;align-items:center;justify-content:center;font-size:11px;color:#1a1206;font-weight:700;}
+.budget .b1{background:linear-gradient(180deg,#dfa55a,#c98d40);}
+.budget .b2{background:linear-gradient(180deg,#9c8bd0,#7f6dbb);color:#fff;}
+.budget .b3{background:linear-gradient(180deg,#6ba7ff,#4b87e0);color:#fff;}
+.budget .b4{background:linear-gradient(180deg,#3a3d4e,#2a2d3a);color:#cfd0dd;}
+.budget .scale{display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);margin-top:6px;}
+
+/* 验证网格 */
+.grid240{display:grid;grid-template-columns:repeat(40,1fr);gap:2px;margin:16px 0 10px;}
+.grid240 i{aspect-ratio:1;background:var(--green);border-radius:1px;opacity:.85;}
+@media(max-width:680px){.grid240{grid-template-columns:repeat(20,1fr);}}
+
+/* 迭代时间线 */
+.tl{list-style:none;margin:18px 0;padding:0;}
+.tl li{position:relative;padding:0 0 20px 26px;border-left:1px solid var(--line);margin:0;}
+.tl li:last-child{border-left-color:transparent;padding-bottom:0;}
+.tl li::before{content:"";position:absolute;left:-4.5px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--accent);}
+.tl .when{font-size:11px;color:var(--accent);letter-spacing:1px;}
+.tl .what{font-weight:600;display:block;margin:2px 0 3px;}
+.tl .why{font-size:13px;color:var(--dim);}
+
+/* 双栏 */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media(max-width:760px){.two{grid-template-columns:1fr;}}
+.card{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--panel);}
+.card h4{margin-top:0;}
+.card p{font-size:13.4px;color:var(--dim);margin:8px 0 0;}
+
+/* 环形图 */
+.cycle{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:center;margin:18px 0;}
+@media(max-width:760px){.cycle{grid-template-columns:1fr;}}
+.cycle svg{width:100%;height:auto;}
+.cycle .legend{list-style:none;padding:0;margin:0;font-size:13px;}
+.cycle .legend li{padding:7px 0;border-bottom:1px dashed var(--line);}
+.cycle .legend b{color:var(--accent);font-weight:600;}
+
+.note{font-size:12.5px;color:var(--dim);background:rgba(223,165,90,.06);border-left:2px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;margin:16px 0;}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner"><a class="brand" href="../作品集主页.html">吕森垚 · 作品集</a><a href="../作品集主页.html">返回作品集主页</a></div></div>
+<main>
+
+<div class="cs-hero">
+  <div class="cs-kicker">CASE STUDY · 系统设计 / 数值 / 可验证</div>
+  <h1>《雾港档案》—— 把"审讯"做成资源管理问题</h1>
+  <p class="cs-lead">一款 AI 审讯推理游戏：四个嫌疑人，四份不在场证明，全都在撒谎。<br>
+  玩家只有 30 小时（第二案 28 小时），而<b>每条线索都要花钱买，每句证词都有时间戳</b>。<br>
+  真凶、时间线、证据链全部由规则引擎写死，大模型只负责把"已裁决的事实"演成人话。</p>
+  <div class="cs-stats">
+    <div><b>2</b><span>案子</span></div>
+    <div><b>12</b><span>线索 / 案</span></div>
+    <div><b>240</b><span>局可解性验证</span></div>
+    <div><b>38</b><span>自动化测试</span></div>
+    <div><b>0</b><span>运行依赖</span></div>
+  </div>
+</div>
+
+<div class="cs-video">
+  <video src="../雾港档案/demo/fog-demo.mp4" poster="../雾港档案/shots/theater.png" autoplay muted loop playsinline controls></video>
+</div>
+<p class="cs-cap">30 秒实录：搜证 → 锁定嫌疑人 → 出示破绽 → 心理防线崩塌（真实操作，非剪辑）</p>
+
+<h2><span class="idx">01</span>问题与目标</h2>
+
+<p>我的作品集主线是<b>系统、数值与运营</b>，作品多是文档。我想补上一件事：<b>设计能不能被验证</b>。</p>
+
+<p>推理游戏是最好的载体——它的"爽点"不是打斗，而是<b>信息差</b>。但市面上的推理游戏有两个通病：线索是免费的（玩家只会穷举），真相掌握在叙事手里（作者说了算）。于是我把这两个通病当成约束来设计：</p>
+
+<table>
+  <thead><tr><th>约束</th><th>它逼出的设计</th></tr></thead>
+  <tbody>
+    <tr><td>线索不能免费</td><td>把时间做成唯一资源：问话 1h、搜查 3–4h、出示 2h → <b>审讯变成资源分配</b></td></tr>
+    <tr><td>真相不能靠作者</td><td>真凶与证据链写进规则引擎，<b>每局都能被程序验证</b>（240 局全通）</td></tr>
+    <tr><td>单人 15 分钟一局</td><td>每案只 5 个地点、12 条线索，<b>做减法而不是加法</b></td></tr>
+    <tr><td>要能被人立刻玩到</td><td>零依赖单文件，双击即玩；离线也能通关</td></tr>
+  </tbody>
+</table>
+
+<div class="note">目标读者不是"悬疑爱好者"，而是招聘方：这个作品要证明三件事——<b>能把体验抽象成系统</b>、<b>能用数值约束玩法</b>、<b>能用测试证明设计成立</b>。</div>
+
+<h2><span class="idx">02</span>核心设计</h2>
+
+<h3>2.1 一局的决策链</h3>
+<div class="cs-flow">
+  <span>搜现场</span><i>→</i>
+  <span class="hot">痕迹指向某人</span><i>→</i>
+  <span>找他的破绽</span><i>→</i>
+  <span class="hot">出示，逼他承认</span><i>→</i>
+  <span>问出动机</span><i>→</i>
+  <span class="hot">指控（一次性下注）</span>
+</div>
+<p>关键约束：<b>现场（第一个地点）永远有三样东西</b>——凶器、精确死亡时间、以及只属于凶手的现场痕迹。这让"第一次搜查"永远有回报，也让新手第一分钟不会空手。</p>
+
+<h3>2.2 时间就是预算</h3>
+<p>全搜 5 个地点要 19h，问完 4 个人要 4h，两次关键出示要 4h——<b>27h，而预算是 30h</b>。想拿 S，就必须靠推理跳过某些地点，而不是靠钱多。</p>
+
+<div class="budget">
+  <div class="bar">
+    <div class="b1" style="width:63%">搜证 19h</div>
+    <div class="b2" style="width:13%">问话 4h</div>
+    <div class="b3" style="width:13%">出示 4h</div>
+    <div class="b4" style="width:11%">余 3h</div>
+  </div>
+  <div class="scale"><span>0h</span><span>15h</span><span>30h（第一案）</span></div>
+</div>
+<p class="cs-cap">"全收集"路线只剩 3 小时余量：刚好够你时间分拿 1 分。这是故意的。</p>
+
+<h3>2.3 四份不在场证明，只有一个凶手</h3>
+<p>每个人都在撒谎：有人去了诊所，有人撕了账本，有人偷了东西，有人只是坐在观众席。四份不在场证明<b>全部是假的</b>，但只有一份通向死者最后那一分钟。红鲱鱼是结构，不是文案。</p>
+
+<div class="cycle">
+  <svg viewBox="0 0 300 300" aria-label="交叉证词环">
+    <circle cx="150" cy="150" r="98" fill="none" stroke="#2a2a38" stroke-width="1" stroke-dasharray="3 7"/>
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#dfa55a"/>
+      </marker>
+    </defs>
+    <!-- 白鹭（下）→ 周慕之（左）→ 苏若晚（上）→ 阿野（右）→ 白鹭 -->
+    <path d="M 108 238 A 98 98 0 0 1 62 196" fill="none" stroke="#dfa55a" stroke-width="1.6" marker-end="url(#ar)" opacity=".85"/>
+    <path d="M 62 104 A 98 98 0 0 1 108 62" fill="none" stroke="#dfa55a" stroke-width="1.6" marker-end="url(#ar)" opacity=".85"/>
+    <path d="M 192 62 A 98 98 0 0 1 238 104" fill="none" stroke="#dfa55a" stroke-width="1.6" marker-end="url(#ar)" opacity=".85"/>
+    <path d="M 238 196 A 98 98 0 0 1 192 238" fill="none" stroke="#dfa55a" stroke-width="1.6" marker-end="url(#ar)" opacity=".85"/>
+    <g font-family="Microsoft YaHei,sans-serif" font-size="13" fill="#e2e3ec" text-anchor="middle">
+      <circle cx="150" cy="52" r="20" fill="#1b1b26" stroke="#3a3a4a"/><text x="150" y="57">苏</text>
+      <circle cx="248" cy="150" r="20" fill="#1b1b26" stroke="#3a3a4a"/><text x="248" y="155">阿野</text>
+      <circle cx="150" cy="248" r="20" fill="#1b1b26" stroke="#3a3a4a"/><text x="150" y="253">白鹭</text>
+      <circle cx="52" cy="150" r="20" fill="#1b1b26" stroke="#3a3a4a"/><text x="52" y="155">周</text>
+    </g>
+  </svg>
+  <ul class="legend">
+    <li><b>白鹭</b> 戳破 周慕之：包厢今晚只坐了两桌客人</li>
+    <li><b>周慕之</b> 戳破 苏若晚：看见有人从侧门出去，穿高跟鞋</li>
+    <li><b>苏若晚</b> 戳破 阿野：断电那四十秒，配电室门开着，里头没人</li>
+    <li><b>阿野</b> 戳破 白鹭：侧门那把锁，锁芯是上礼拜才换的</li>
+    <li style="border:none;color:var(--dim);padding-top:10px;">环是闭合的 → 无论抽到谁当凶手，都存在一条"纯靠问话"的推理路径。<b>这条不变量写进了测试</b>。</li>
+  </ul>
+</div>
+
+<h3>2.4 五类线索，各管一件事</h3>
+<table>
+  <thead><tr><th>类型</th><th>作用</th><th>数量</th></tr></thead>
+  <tbody>
+    <tr><td>凶器</td><td>决定"手法"这一项分数</td><td class="num">1</td></tr>
+    <tr><td>时间</td><td>把死亡窗口从 30 分钟收窄到 1 分钟</td><td class="num">1</td></tr>
+    <tr><td>现场痕迹</td><td>指向凶手——但只能证明"来过"，不能定罪</td><td class="num">1</td></tr>
+    <tr><td>破绽</td><td>戳破某个人的不在场证明</td><td class="num">4</td></tr>
+    <tr><td>私事</td><td>解释"他为什么可疑但不是凶手"（红鲱鱼）</td><td class="num">4</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="idx">03</span>关键取舍</h2>
+
+<div class="two">
+  <div class="card">
+    <h4>① 不让模型决定"谁有罪"</h4>
+    <p>对比过三条路：让 AI 写剧情（没有输赢）、让 AI 演 NPC（对话没有后果）、<b>让 AI 只负责"说"</b>。选了第三条：真相在引擎里，模型只拿到"必须说出口的事实"。</p>
+    <p style="color:#c9cadb;">代价：放弃自由生成。收益：<b>换模型不改变难度，断网也能通关</b>。</p>
+  </div>
+  <div class="card">
+    <h4>② 预算定 30h，不是"越多越好"</h4>
+    <p>按"全收集 27h"倒推：留 3 小时余量，让全收集刚好拿不到时间分。如果给 40h，玩家会穷举，审讯就退化成点选。</p>
+    <p style="color:#c9cadb;">代价：新手容易时间不够。收益：<b>取舍变成核心玩法</b>。</p>
+  </div>
+  <div class="card">
+    <h4>③ 每案只 4 个嫌疑人</h4>
+    <p>5 人以上会让"交叉证词环"的写作成本和玩家记忆负担同时爆炸。4 人正好能闭合一个环，且每人 2 条软肋级线索。</p>
+    <p style="color:#c9cadb;">代价：重玩价值靠"凶手 + 手法"组合（16 种）。收益：<b>内容质量可控</b>。</p>
+  </div>
+  <div class="card">
+    <h4>④ 被否决的方案</h4>
+    <p>· <b>好感度系统</b>：会稀释"你说的每句话都有代价"。<br>
+       · <b>线索免费、真相靠推理</b>：玩家会穷举，没有取舍。<br>
+       · <b>让 AI 现场编线索</b>：不可验证，一局崩一次。</p>
+  </div>
+</div>
+
+<h2><span class="idx">04</span>验证</h2>
+
+<h3>4.1 可解性是被证明的，不是被声称的</h3>
+<p>任何一局都必须<b>在预算内可破</b>。我写了自动化测试：每个案子跑 120 个随机种子，用"完美解"走一遍——现场 → 凶手破绽所在地 → 出示 2 次 → 问动机 → 指控。</p>
+
+<div class="grid240" aria-label="240 局验证全部通过"></div>
+<p class="cs-cap">240 个随机种子（两案各 120）× 完美通关：全部 100 分、S 评级、剩余时间 &gt; 0。</p>
+
+<table>
+  <thead><tr><th>不变量</th><th>检查方式</th></tr></thead>
+  <tbody>
+    <tr><td>每局恰好 1 个凶手</td><td>240 次生成后断言</td></tr>
+    <tr><td>每条线索恰好属于 1 个地点</td><td>无孤儿线索 / 无重复归属</td></tr>
+    <tr><td>每人都有破绽 + 私事 + 侧写 + 入场</td><td>七件套完整性检查</td></tr>
+    <tr><td>四个人都被别人戳破过</td><td>交叉证词环闭合</td></tr>
+    <tr><td>现场必有凶手的痕迹</td><td>痕迹指向 === 真凶</td></tr>
+    <tr><td>最优解 ≤ 13h &lt; 预算</td><td>逐案计算最坏情况</td></tr>
+  </tbody>
+</table>
+
+<h3>4.2 测试真的抓到过东西</h3>
+<p>这三个 bug 都不是靠眼睛看出来的，是不变量测出来的——也是我最想讲的部分：</p>
+<table>
+  <thead><tr><th>Bug</th><th>后果</th><th>根因</th></tr></thead>
+  <tbody>
+    <tr><td>出示破绽时"判决"被改写</td><td>结案时"戳破不在场证明"永远 0 分</td><td>防线归零的招供覆盖了主判决</td></tr>
+    <tr><td>第二案两人共用同一个动机 ID</td><td>指认错人也能拿动机分</td><td>内容配置缺少唯一性约束</td></tr>
+    <tr><td>案情卡写死了第一案</td><td>第二案显示错误的死亡窗口与现场名</td><td>跨案复用时把常量当成了变量</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="idx">05</span>迭代</h2>
+<ul class="tl">
+  <li><span class="when">v0.1</span><span class="what">一个案子，纯对话</span><span class="why">发现：没有时间压力，玩家会把四段证词全问一遍 → 无取舍。</span></li>
+  <li><span class="when">v0.4</span><span class="what">加入时间经济与防线</span><span class="why">问话 1h、搜查 3–4h、出示 2h；防线 3 格。<b>第一次出现"该问谁"的决策</b>。</span></li>
+  <li><span class="when">v0.8</span><span class="what">AI 分层：引擎掌真相、模型掌语气</span><span class="why">模型开始跑偏过（编造不在场证明）→ 改成"只给它必须说出口的事实"，并加降级。</span></li>
+  <li><span class="when">v1.0</span><span class="what">第二案《显影》：密室</span><span class="why">难度不靠加线索，靠<b>降低物证的解释力</b>：现场痕迹只能证明"来过"，而第一个进门的人本来就该来过。</span></li>
+  <li><span class="when">v1.2</span><span class="what">三层新手引导</span><span class="why">观察：玩家打开就愣住 → 开局卡（从这里开始）+ 局内指引条（做一步勾一步）+ 可重看教程。</span></li>
+  <li><span class="when">v1.4</span><span class="what">证据板从"选中"改成"卡片详情页"</span><span class="why">原来的"选中→出示"藏在一个 12px 的图标里，没人发现；改成整卡可点，详情里直接出示。</span></li>
+</ul>
+
+<h2><span class="idx">06</span>反思</h2>
+
+<h3>还缺什么</h3>
+<ul>
+  <li><b>真人测试</b>：现在只有"程序可解"，没有"人觉得好玩"。下一步找 5 个没玩过的同学，记录首次通关时间、卡点、放弃率。</li>
+  <li><b>难度曲线</b>：两案难度差主要靠预算（30h→28h）和物证解释力，缺少量化验证。</li>
+  <li><b>内容量</b>：16 种组合撑不起长线，第三案要换结构（法庭对质）。</li>
+</ul>
+
+<h3>如果重做一次</h3>
+<p>我会把<b>验证前置</b>：先写"完美解脚本 + 不变量测试"，再做内容。这次是先写内容、后补测试，导致三个配置 bug 是在整合第二案时才被发现的——如果一开始就有 schema 校验，写案子时就会报错。</p>
+
+<h3>我在这个项目里做了什么</h3>
+<ul>
+  <li><b>设计</b>：玩法抽象（时间经济）、数值（30h 预算、55/18/17 评分）、案子结构（五件套、交叉证词环）、两案剧本与全部台词。</li>
+  <li><b>验证</b>：设计不变量、编写 38 项测试、定义 240 局可解性标准、从测试与截图里定位 bug。</li>
+  <li><b>实现</b>：在 AI 编程工具的协助下完成代码；架构决策（引擎/渲染分离、单文件打包）由我确定。</li>
+</ul>
+
+<div class="note">面试时如果被问"这是你做的吗"——我的回答是：<b>设计和验证是我做的，代码是借助 AI 工具实现的；每一个数字、每一条取舍我都能解释为什么。</b>这个页面本身就是在解释为什么。</div>
+
+<h2><span class="idx">07</span>自己看</h2>
+<ul>
+  <li>试玩（单文件，双击即玩）：<a href="../雾港档案/雾港档案.html">雾港档案.html</a></li>
+  <li>设计文档（完整规则与剧本规范）：<a href="作品14_游戏设计文档_雾港档案.html">作品14 · 游戏设计文档</a></li>
+  <li>演示视频：<a href="../雾港档案/demo/fog-demo.mp4">fog-demo.mp4</a>（30 秒）</li>
+</ul>
+
+<div class="foot">吕森垚 · 山西传媒学院 · 数字媒体艺术 · 2027 届</div>
+</main>
+<script>
+// 240 格验证网格
+const g = document.querySelector('.grid240');
+if (g) for (let i = 0; i < 240; i++) g.appendChild(document.createElement('i'));
+</script>
+</body>
+</html>

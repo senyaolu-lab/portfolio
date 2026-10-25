@@ -5,3 +5,4 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 .hero{overflow:clip}.hero-copy{min-width:0}@media(min-width:761px) and (max-width:1599px){.hero-layout{padding-top:42px;padding-bottom:38px}.hero-stage{padding-top:25px}.display-screen{aspect-ratio:1.5}.stage-caption{margin-top:18px}}
 .game-display{width:calc(100% - 32px);margin-inline:16px}
+.early-experience{padding-top:55px}.early-experience .experience{background:#c6f36b04;padding-inline:24px}.early-experience summary strong{font-size:26px}.experience-summary-meta{display:block;font:10px/1.7 var(--mono);color:#8e9a82;margin-top:11px}.early-experience + #aigame{padding-top:85px}@media(max-width:760px){.early-experience{padding-top:35px}.early-experience .experience{padding-inline:18px}.early-experience summary strong{font-size:23px}.early-experience + #aigame{padding-top:60px}}

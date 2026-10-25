@@ -165,6 +165,14 @@ footer{border-top:1px solid var(--line);padding:52px 0;text-align:center;color:v
 footer .big{font-family:var(--serif);font-size:17px;color:var(--text);letter-spacing:3px;margin-bottom:10px;}
 footer a{color:var(--gold);}
 footer .note{margin-top:14px;opacity:.65;}
+
+/* Companion visual portfolio */
+nav .portfolio-switch{flex-shrink:0;font-size:11px;letter-spacing:.3px;color:var(--dim);margin-left:24px;padding:8px 0 8px 18px;border-left:1px solid var(--line);white-space:nowrap;transition:color .2s;}
+nav .portfolio-switch span{color:var(--gold);margin-left:5px;}
+nav .portfolio-switch:hover{color:var(--gold);}
+nav .portfolio-switch:focus-visible{outline:2px solid var(--gold);outline-offset:5px;}
+@media(max-width:960px){nav .links{gap:15px;font-size:12px;}nav .portfolio-switch{margin-left:16px;padding-left:14px;}}
+@media(max-width:760px){nav .links{display:none;}nav .portfolio-switch{margin-left:auto;font-size:11px;}}
 </style>
 </head>
 <body>
@@ -180,6 +188,7 @@ footer .note{margin-top:14px;opacity:.65;}
       <a href="#works">作品</a>
       <a href="#protos">原型</a>
     </div>
+    <a class="portfolio-switch" href="https://senyao-creative-lab.rockyheron12.chatgpt.site/" aria-label="切换到视觉设计作品集">视觉作品集 <span aria-hidden="true">↗</span></a>
   </div>
 </nav>
 
